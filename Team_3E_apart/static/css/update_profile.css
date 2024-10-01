@@ -11,49 +11,107 @@ body {
     align-items: center; /* 중앙 정렬 */
 }
 
+header {
+    width: 100%;
+    background-color: white; /* 헤더 배경 */
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 섬세한 그림자 */
+}
+
+nav ul {
+    list-style: none; /* 불릿 제거 */
+    padding: 0;
+    display: flex; /* 플렉스박스 사용 */
+    justify-content: space-between; /* 항목 간의 간격 설정 */
+}
+
+nav ul li {
+    margin: 0 10px; /* 항목 간의 여백 */
+}
+
+nav ul li a, .btn-quick-menu {
+    text-decoration: none; /* 밑줄 제거 */
+    color: #007bff; /* 링크 색상 */
+    font-weight: bold; /* 두껍게 설정 */
+}
+
+.quick-menu {
+    display: none; /* 초기 상태에서 숨김 */
+    position: absolute; /* 위치 절대 지정 */
+    background-color: white; /* 흰색 배경 */
+    border: 1px solid #ccc; /* 연한 테두리 */
+    border-radius: 5px; /* 둥근 모서리 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 */
+    padding: 10px; /* 패딩 추가 */
+    z-index: 1000; /* 다른 요소 위에 표시 */
+}
+
+.quick-menu ul {
+    list-style: none; /* 불릿 제거 */
+    padding: 0;
+}
+
+.quick-menu ul li {
+    margin: 5px 0; /* 항목 간의 여백 */
+}
+
+.quick-menu ul li a {
+    color: #007bff; /* 링크 색상 */
+    font-weight: normal; /* 일반 두께 */
+}
+
+.welcome,
+.latest-posts,
+.community-rules {
+    width: 100%;
+    max-width: 800px; /* 최대 너비 설정 */
+    background: white; /* 흰색 배경 */
+    border-radius: 10px; /* 둥근 모서리 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 깊이를 위한 섬세한 그림자 */
+    padding: 20px;
+    margin-bottom: 20px; /* 아래쪽 여백 */
+}
+
 h2 {
     color: #007bff; /* 제목에 사용할 블루 색상 */
     margin-bottom: 20px; /* 제목과 폼 사이의 여백 */
 }
 
-form {
-    background: white; /* 폼 배경을 흰색으로 설정 */
-    border-radius: 10px; /* 둥근 모서리 */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 깊이를 위한 섬세한 그림자 */
-    padding: 20px;
+.latest-posts ul {
+    list-style: none; /* 불릿 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+}
+
+.latest-posts ul li {
+    margin: 10px 0; /* 각 게시글 간의 여백 */
+}
+
+.latest-posts a {
+    color: #007bff; /* 링크 색상 */
+}
+
+.container {
+    display: flex; /* 플렉스박스 사용 */
+    justify-content: space-between; /* 공간 분배 */
+    flex-wrap: wrap; /* 여러 줄로 나누기 */
     width: 100%;
-    max-width: 400px; /* 최대 너비 설정 */
+    margin-bottom: 20px; /* 아래쪽 여백 */
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%; /* 입력 필드가 전체 너비를 차지 */
-    padding: 12px;
-    margin: 10px 0; /* 입력 필드 사이의 여백 */
-    border: 1px solid #ccc; /* 연한 테두리 */
-    border-radius: 5px; /* 살짝 둥근 모서리 */
-    font-size: 16px; /* 일관된 폰트 크기 */
+.box {
+    flex: 1; /* 동일한 비율로 너비 분배 */
+    min-width: 200px; /* 최소 너비 설정 */
+    background: #ffffff; /* 박스 배경색 */
+    border-radius: 10px; /* 둥근 모서리 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 */
+    padding: 20px; /* 패딩 */
+    margin: 10px; /* 마진 */
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border-color: #007bff; /* 포커스 시 블루 테두리 */
-    outline: none; /* 기본 윤곽선 제거 */
-}
-
-button {
-    background-color: #007bff; /* 버튼 배경을 블루로 설정 */
-    color: white; /* 버튼 텍스트를 흰색으로 설정 */
-    padding: 12px;
-    border: none; /* 테두리 제거 */
-    border-radius: 5px; /* 둥근 모서리 */
-    cursor: pointer; /* 마우스 커서 포인터로 변경 */
-    font-size: 16px; /* 일관된 폰트 크기 */
-    transition: background-color 0.3s ease; /* 부드러운 배경 색상 전환 */
-}
-
-button:hover {
-    background-color: #0056b3; /* 호버 시 더 어두운 블루 */
+footer {
+    width: 100%; /* 전체 너비 설정 */
+    text-align: center; /* 가운데 정렬 */
+    margin-top: 20px; /* 위쪽 여백 */
+    padding: 10px; /* 패딩 */
+    background-color: #f1f1f1; /* 배경색 */
 }

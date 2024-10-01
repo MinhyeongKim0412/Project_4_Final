@@ -7,50 +7,87 @@
     {% load static %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}"> <!-- 스타일 시트 연결 -->
+    <script>
+        function toggleQuickMenu() {
+            const menu = document.querySelector('.quick-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
 </head>
 <body>
-    <header>
-        <h1>아파트 주민 커뮤니티</h1>
-        <nav>
-            <ul>
-                <li><a href="{% url '홈' %}">홈</a></li>
-                <li><a href="{% url '로그인' %}">로그인</a></li>
-                <li><a href="{% url '회원가입' %}">회원가입</a></li>
-                <li><a href="{% url '마이페이지' %}">마이페이지</a></li>
-                <li><a href="{% url '게시판' %}">게시판</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="mobile-screen">
+        <header>
+            <h1>아파트 주민 커뮤니티</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url '홈' %}">홈</a></li>
+                    <li><a href="{% url '로그인' %}">로그인</a></li>
+                    <li><a href="{% url '회원가입' %}">회원가입</a></li>
+                    <li><a href="{% url '마이페이지' %}">마이페이지</a></li>
+                    <li><a href="{% url '게시판' %}">게시판</a></li>
+                    <li class="btn-quick-menu" onclick="toggleQuickMenu()">바로가기</li>
+                </ul>
+            </nav>
+            <div class="quick-menu" style="display:none;">
+                <ul>
+                    <li><a href="{% url '로그인' %}">로그인</a></li>
+                    <li><a href="{% url '회원가입' %}">회원가입</a></li>
+                </ul>
+            </div>
+        </header>
 
-    <main>
-        <section class="welcome">
-            <h2>환영합니다!</h2>
-            <p>우리 아파트 커뮤니티에 오신 것을 환영합니다. 주민들과 소통하고 다양한 정보를 공유하세요.</p>
-        </section>
+        <main>
+            <section class="welcome">
+                <h2>환영합니다!</h2>
+                <p>우리 아파트 커뮤니티에 오신 것을 환영합니다. 주민들과 소통하고 다양한 정보를 공유하세요.</p>
+            </section>
 
-        <section class="latest-posts">
-            <h2>최신 게시글</h2>
-            <ul>
-                <li><a href="{% url '글조회' post_id=1 %}">첫 번째 게시글 제목</a> - 2024-10-01</li>
-                <li><a href="{% url '글조회' post_id=2 %}">두 번째 게시글 제목</a> - 2024-10-02</li>
-                <li><a href="{% url '글조회' post_id=3 %}">세 번째 게시글 제목</a> - 2024-10-03</li>
-            </ul>
-            <a href="{% url '글작성' %}" class="btn">새 게시글 작성하기</a>
-        </section>
+            <section class="container">
+                <div class="box">
+                    <h3>주요 공지사항</h3>
+                    <p>다음 주에 예정된 커뮤니티 미팅이 있습니다. 참여를 원하시면 사전 신청해주세요.</p>
+                </div>
+                <div class="box">
+                    <h3>주민 건강 캠페인</h3>
+                    <p>건강을 위한 캠페인이 진행 중입니다. 자세한 사항은 게시판을 확인하세요.</p>
+                </div>
+                <div class="box">
+                    <h3>편의 시설 안내</h3>
+                    <p>우리 아파트의 다양한 편의 시설을 확인하세요! 언제든지 이용 가능합니다.</p>
+                </div>
+            </section>
 
-        <section class="community-rules">
-            <h2>커뮤니티 규칙</h2>
-            <p>우리 커뮤니티는 모든 주민이 안전하고 존중받는 환경에서 소통할 수 있도록 아래의 규칙을 준수해 주시기 바랍니다:</p>
-            <ul>
-                <li>서로 존중하고 예의 있게 대화합시다.</li>
-                <li>불법적인 내용이나 악성 게시글은 금지합니다.</li>
-                <li>타인의 개인정보를 보호해주세요.</li>
-            </ul>
-        </section>
-    </main>
+            <section class="latest-posts">
+                <h2>최신 게시글</h2>
+                <ul>
+                    <li><a href="{% url '글조회' post_id=1 %}">첫 번째 게시글 제목</a> - 2024-10-01</li>
+                    <li><a href="{% url '글조회' post_id=2 %}">두 번째 게시글 제목</a> - 2024-10-02</li>
+                    <li><a href="{% url '글조회' post_id=3 %}">세 번째 게시글 제목</a> - 2024-10-03</li>
+                </ul>
+                <a href="{% url '게시판' %}" class="btn">게시판 바로가기</a>
+            </section>
 
-    <footer>
-        <p>&copy; 2024 아파트 주민 커뮤니티. All rights reserved.</p>
-    </footer>
+            <section class="community-rules">
+                <h2>커뮤니티 규칙</h2>
+                <p>우리 커뮤니티는 모든 주민이 안전하고 존중받는 환경에서 소통할 수 있도록 아래의 규칙을 준수해 주시기 바랍니다:</p>
+                <ul>
+                    <li>서로 존중하고 예의 있게 대화합시다.</li>
+                    <li>불법적인 내용이나 악성 게시글은 금지합니다.</li>
+                    <li>타인의 개인정보를 보호해주세요.</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 아파트 주민 커뮤니티. All rights reserved.</p>
+        </footer>
+
+        <!-- 핸드폰 하단 메뉴바 -->
+        <div class="bottom-nav">
+            <a href="#" class="nav-btn">뒤로가기</a>
+            <a href="#" class="nav-btn">홈</a>
+            <a href="#" class="nav-btn">메뉴</a>
+        </div>
+    </div>
 </body>
 </html>
