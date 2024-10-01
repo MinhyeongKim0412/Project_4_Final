@@ -17,6 +17,7 @@ WEB
 └─ Team_3E_apart
    ├─ admin.py
    ├─ apps.py
+   ├─ media
    ├─ migrations
    │  ├─ 0001_initial.py
    │  ├─ __init__.py
@@ -24,6 +25,21 @@ WEB
    │     ├─ 0001_initial.cpython-312.pyc
    │     └─ __init__.cpython-312.pyc
    ├─ models.py
+   ├─ static
+   │  ├─ css
+   │  └─ js
+   ├─ templates
+   │  ├─ board.html
+   │  ├─ delete_account.html
+   │  ├─ find_account.html
+   │  ├─ login.html
+   │  ├─ mypage.html
+   │  ├─ post_create.html
+   │  ├─ post_edit.html
+   │  ├─ post_reaction.html
+   │  ├─ post_view.html
+   │  ├─ signup.html
+   │  └─ update_profile.html
    ├─ tests.py
    ├─ urls.py
    ├─ views.py
