@@ -1,0 +1,59 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    background-color: #f7f9fc; /* 깔끔한 밝은 배경 */
+    color: #333; /* 대비를 위한 어두운 텍스트 색상 */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 중앙 정렬 */
+}
+
+h2 {
+    color: #007bff; /* 제목에 사용할 블루 색상 */
+    margin-bottom: 20px; /* 제목과 폼 사이의 여백 */
+}
+
+form {
+    background: white; /* 폼 배경을 흰색으로 설정 */
+    border-radius: 10px; /* 둥근 모서리 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 깊이를 위한 섬세한 그림자 */
+    padding: 20px;
+    width: 100%;
+    max-width: 400px; /* 최대 너비 설정 */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%; /* 입력 필드가 전체 너비를 차지 */
+    padding: 12px;
+    margin: 10px 0; /* 입력 필드 사이의 여백 */
+    border: 1px solid #ccc; /* 연한 테두리 */
+    border-radius: 5px; /* 살짝 둥근 모서리 */
+    font-size: 16px; /* 일관된 폰트 크기 */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff; /* 포커스 시 블루 테두리 */
+    outline: none; /* 기본 윤곽선 제거 */
+}
+
+button {
+    background-color: #007bff; /* 버튼 배경을 블루로 설정 */
+    color: white; /* 버튼 텍스트를 흰색으로 설정 */
+    padding: 12px;
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 마우스 커서 포인터로 변경 */
+    font-size: 16px; /* 일관된 폰트 크기 */
+    transition: background-color 0.3s ease; /* 부드러운 배경 색상 전환 */
+}
+
+button:hover {
+    background-color: #0056b3; /* 호버 시 더 어두운 블루 */
+}

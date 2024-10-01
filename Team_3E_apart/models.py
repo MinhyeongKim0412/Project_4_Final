@@ -25,15 +25,29 @@ class CustomUser(AbstractUser):
         verbose_name='user permissions'
     )
 
+    def __str__(self):
+        return self.username  # 사용자 이름을 문자열로 반환
+
 # 게시판 모델 (글 작성, 수정, 삭제, 조회 기능)
 class Post(models.Model):
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    likes = models.IntegerField(default=0)
-    dislikes = models.IntegerField(default=0)
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)  # 작성자 연결
+    title = models.CharField(max_length=100)  # 제목
+    content = models.TextField()  # 내용
+    created_at = models.DateTimeField(auto_now_add=True)  # 생성일
+    updated_at = models.DateTimeField(auto_now=True)  # 수정일
+    likes = models.IntegerField(default=0)  # 좋아요 수
+    dislikes = models.IntegerField(default=0)  # 싫어요 수
 
     def __str__(self):
-        return self.title
+        return self.title  # 제목을 문자열로 반환
+
+# 댓글 모델 (게시글에 대한 댓글 기능)
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')  # 게시글과 연결
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)  # 작성자 연결
+    content = models.TextField()  # 댓글 내용
+    created_at = models.DateTimeField(auto_now_add=True)  # 생성일
+    updated_at = models.DateTimeField(auto_now=True)  # 수정일
+
+    def __str__(self):
+        return f'Comment by {self.author} on {self.post}'  # 댓글 작성자와 게시글을 문자열로 반환

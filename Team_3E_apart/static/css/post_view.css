@@ -1,0 +1,49 @@
+/* 웹폰트 불러오기 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+/* 전체 스타일 */
+body {
+    font-family: 'Pretendard Variable', '나눔고딕', sans-serif; /* 프리텐다드 폰트와 나눔고딕 폰트 적용 */
+    background-color: #f8f8f8; /* 배경색 */
+    color: #333; /* 텍스트 색상 */
+    margin: 0;
+    padding: 20px;
+}
+
+h2 {
+    color: #007bff; /* 제목 색상 */
+}
+
+p {
+    line-height: 1.6;
+}
+
+.reaction-buttons {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #007bff; /* 버튼 배경색 */
+    color: white; /* 버튼 텍스트 색상 */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3; /* 버튼 호버 색상 */
+}
+
+a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff; /* 링크 색상 */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #0056b3; /* 링크 호버 색상 */
+}

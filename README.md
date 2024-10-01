@@ -27,6 +27,17 @@ WEB
    ├─ models.py
    ├─ static
    │  ├─ css
+   │  │  ├─ board.css
+   │  │  ├─ delete_account.css
+   │  │  ├─ find_account.css
+   │  │  ├─ login.css
+   │  │  ├─ mypage.css
+   │  │  ├─ post_create.css
+   │  │  ├─ post_edit.css
+   │  │  ├─ post_reaction.css
+   │  │  ├─ post_view.css
+   │  │  ├─ signup.css
+   │  │  └─ update_profile.css
    │  └─ js
    ├─ templates
    │  ├─ board.html

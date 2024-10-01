@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
+</head>
+<body>
+    <h2>마이페이지</h2>
+    <p>안녕하세요, {{ user.username }}님!</p>
+    <a href="{% url '회원정보수정' %}">회원정보 수정</a>
+    <a href="{% url '회원탈퇴' %}">회원 탈퇴</a>
+</body>
+</html>

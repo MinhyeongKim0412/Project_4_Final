@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시물 조회</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/post_view.css' %}">
+</head>
+<body>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    <p>작성자: {{ post.author }}</p>
+    <p>작성일: {{ post.created_at }}</p>
+    
+    <div class="reaction-buttons"> <!-- 버튼을 감싸는 div 추가 -->
+        <button type="button" onclick="likePost({{ post.id }})">좋아요</button>
+        <button type="button" onclick="dislikePost({{ post.id }})">싫어요</button>
+    </div>
+
+    <a href="{% url '글수정' post.id %}">수정하기</a>
+    <a href="{% url '게시판' %}">목록으로 돌아가기</a>
+
+    <script>
+        function likePost(postId) {
+            // AJAX 요청이나 다른 로직을 여기에 추가하여 좋아요 기능 구현
+            console.log("좋아요 버튼 클릭됨: " + postId);
+        }
+
+        function dislikePost(postId) {
+            // AJAX 요청이나 다른 로직을 여기에 추가하여 싫어요 기능 구현
+            console.log("싫어요 버튼 클릭됨: " + postId);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/board.css' %}">
+</head>
+<body>
+    <h2>아파트 주민 게시판</h2>
+    <a href="{% url '글작성' %}">글 작성하기</a>
+    <ul>
+        <!-- 게시물 목록이 여기 들어갑니다 -->
+    </ul>
+</body>
+</html>
