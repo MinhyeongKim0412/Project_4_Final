@@ -26,7 +26,10 @@ form {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="tel"],
+input[type="email"],
+input[type="button"] {
     width: 100%; /* 입력 필드가 전체 너비를 차지 */
     padding: 12px;
     margin: 10px 0; /* 입력 필드 사이의 여백 */
@@ -36,7 +39,10 @@ input[type="password"] {
 }
 
 input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+input[type="button"]:focus {
     border-color: #007bff; /* 포커스 시 블루 테두리 */
     outline: none; /* 기본 윤곽선 제거 */
 }

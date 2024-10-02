@@ -4,7 +4,12 @@ from django.contrib.auth import get_user_model
 
 # 사용자 모델 커스터마이징 (로그인, 회원가입, 회원 정보 관리 등)
 class CustomUser(AbstractUser):
-    apartment_number = models.CharField(max_length=10, blank=True, null=True)
+    apartment_number = models.CharField(max_length=10, blank=True, null=True)  # 아파트 번호 추가
+    phone = models.CharField(max_length=15, blank=False, default='000-0000-0000')  # 전화번호 필드에 기본값 추가
+    email = models.EmailField(unique=True, blank=False)  # 이메일 필드 추가
+    address = models.CharField(max_length=255, blank=False, default='Unknown address')
+    detail_address = models.CharField(max_length=255, blank=True)  # 상세 주소 필드 추가
+    postcode = models.CharField(max_length=10, blank=True)  # 우편번호 필드 추가
 
     # groups 필드 수정
     groups = models.ManyToManyField(
