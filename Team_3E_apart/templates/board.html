@@ -9,10 +9,24 @@
     <link rel="stylesheet" href="{% static 'css/board.css' %}">
 </head>
 <body>
-    <h2>아파트 주민 게시판</h2>
-    <a href="{% url '글작성' %}">글 작성하기</a>
+    <header>
+        <h2>아파트 주민 게시판</h2>
+        <nav>
+            <a href="{% url '글작성' %}">글 작성하기</a>  <!-- 글 작성하기 링크 -->
+            <a href="{% url '마이페이지' %}">마이 페이지</a>  <!-- 마이 페이지 링크 -->
+        </nav>
+    </header>
+    
     <ul>
-        <!-- 게시물 목록이 여기 들어갑니다 -->
+        {% for post in posts %}
+            <li>
+                <a href="{% url '글조회' post.id %}">{{ post.title }}</a> <!-- 게시물 제목을 클릭하면 게시물 상세보기로 이동 -->
+                <p>작성자: {{ post.author.username }}</p>
+                <p>작성일: {{ post.created_at }}</p> <!-- 작성일 추가 -->
+            </li>
+        {% empty %}
+            <li>게시물이 없습니다.</li> <!-- 게시물이 없을 경우 메시지 -->
+        {% endfor %}
     </ul>
 </body>
 </html>

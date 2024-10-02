@@ -10,13 +10,29 @@
 </head>
 <body>
     <h2>로그인</h2>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <form method="POST">
         {% csrf_token %}
-        <input type="text" name="username" placeholder="아이디" required>
-        <input type="password" name="password" placeholder="비밀번호" required>
+        <label for="username">아이디:</label>
+        <input type="text" id="username" name="username" placeholder="아이디" required>
+        
+        <label for="password">비밀번호:</label>
+        <input type="password" id="password" name="password" placeholder="비밀번호" required>
+        
         <button type="submit">로그인</button>
     </form>
-    <a href="{% url '회원가입' %}">회원가입</a>
-    <a href="{% url '정보찾기' %}">회원정보 찾기</a>
+    
+    <nav>
+        <a href="{% url '회원가입' %}">회원가입</a>
+        <a href="{% url '정보찾기' %}">회원정보 찾기</a>
+    </nav>
 </body>
 </html>

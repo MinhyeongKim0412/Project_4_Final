@@ -14,7 +14,7 @@
     <p>작성자: {{ post.author }}</p>
     <p>작성일: {{ post.created_at }}</p>
     
-    <div class="reaction-buttons"> <!-- 버튼을 감싸는 div 추가 -->
+    <div class="reaction-buttons">
         <button type="button" onclick="likePost({{ post.id }})">좋아요</button>
         <button type="button" onclick="dislikePost({{ post.id }})">싫어요</button>
     </div>
@@ -22,14 +22,30 @@
     <a href="{% url '글수정' post.id %}">수정하기</a>
     <a href="{% url '게시판' %}">목록으로 돌아가기</a>
 
+    <h3>댓글</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- 댓글 양식 렌더링 -->
+        <button type="submit">댓글 달기</button>
+    </form>
+
+    <div class="comments">
+        {% for comment in comments %}
+            <div class="comment">
+                <p>{{ comment.author }}: {{ comment.content }}</p>
+                <p>작성일: {{ comment.created_at }}</p>
+            </div>
+        {% empty %}
+            <p>댓글이 없습니다.</p>
+        {% endfor %}
+    </div>
+
     <script>
         function likePost(postId) {
-            // AJAX 요청이나 다른 로직을 여기에 추가하여 좋아요 기능 구현
             console.log("좋아요 버튼 클릭됨: " + postId);
         }
 
         function dislikePost(postId) {
-            // AJAX 요청이나 다른 로직을 여기에 추가하여 싫어요 기능 구현
             console.log("싫어요 버튼 클릭됨: " + postId);
         }
     </script>

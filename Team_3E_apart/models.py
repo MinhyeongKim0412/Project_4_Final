@@ -14,24 +14,24 @@ class CustomUser(AbstractUser):
     # groups 필드 수정
     groups = models.ManyToManyField(
         Group,
-        related_name='customuser_set',  # 커스텀 유저 모델에 대한 고유한 이름
+        related_name='customuser_set',
         blank=True,
-        help_text='The groups this user belongs to. A user will get all permissions '
-                  'granted to each of their groups.',
-        verbose_name='groups'
+        help_text='사용자가 속한 그룹입니다. 사용자는 각 그룹에서 부여된 모든 권한을 얻습니다.',
+        verbose_name='그룹'
     )
 
     # user_permissions 필드 수정
     user_permissions = models.ManyToManyField(
         Permission,
-        related_name='customuser_set',  # 커스텀 유저 모델에 대한 고유한 이름
+        related_name='customuser_set',
         blank=True,
-        help_text='Specific permissions for this user.',
-        verbose_name='user permissions'
+        help_text='이 사용자에 대한 특정 권한입니다.',
+        verbose_name='사용자 권한'
     )
 
     def __str__(self):
         return self.username  # 사용자 이름을 문자열로 반환
+
 
 # 게시판 모델 (글 작성, 수정, 삭제, 조회 기능)
 class Post(models.Model):
@@ -45,6 +45,7 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title  # 제목을 문자열로 반환
+
 
 # 댓글 모델 (게시글에 대한 댓글 기능)
 class Comment(models.Model):

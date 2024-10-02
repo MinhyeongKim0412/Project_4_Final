@@ -9,11 +9,22 @@
     <link rel="stylesheet" href="{% static 'css/delete_account.css' %}">
 </head>
 <body>
-    <h2>회원 탈퇴</h2>
+    <header>
+        <h2>회원 탈퇴</h2>
+        <nav>
+            <a href="{% url '홈' %}">홈으로</a>  <!-- 홈으로 돌아가는 링크 -->
+            <a href="{% url '마이페이지' %}">마이 페이지</a>  <!-- 마이 페이지 링크 -->
+        </nav>
+    </header>
+    
     <form method="POST">
         {% csrf_token %}
         <p>정말로 회원탈퇴 하시겠습니까?</p>
         <button type="submit">탈퇴하기</button>
     </form>
+    
+    {% if user.is_authenticated %}
+        <p>현재 로그인 중인 사용자: {{ user.username }}</p>  <!-- 로그인한 사용자 이름 표시 -->
+    {% endif %}
 </body>
 </html>

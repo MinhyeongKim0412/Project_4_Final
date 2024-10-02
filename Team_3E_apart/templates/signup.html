@@ -5,60 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
     {% load static %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
-    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- 다음 주소 API -->
-    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">  <!-- CSS 파일 로드 -->
 </head>
 <body>
-    <h2>회원가입</h2>
-    <form method="POST">
-        {% csrf_token %}
-        <input type="text" name="username" placeholder="아이디" required>
-        <input type="password" name="password" placeholder="비밀번호" required>
-        <input type="text" name="name" placeholder="이름" required>
-        <input type="tel" name="phone" placeholder="전화번호" required>
-        <input type="email" name="email" placeholder="이메일" required>
-
-        <!-- 주소 입력 -->
-        <input type="text" id="postcode" name="postcode" placeholder="우편번호" readonly>
-        <input type="text" id="address" name="address" placeholder="주소" readonly required>
-        <input type="text" id="detailAddress" name="detailAddress" placeholder="상세 주소" required>
-        <button type="button" onclick="execDaumPostcode()">주소 찾기</button>
-
-        <button type="submit">가입하기</button>
-    </form>
-
-    <script>
-        function execDaumPostcode() {
-            new daum.Postcode({
-                oncomplete: function(data) {
-                    var fullAddr = ''; 
-                    var extraAddr = ''; 
-
-                    if (data.userSelectedType === 'R') { 
-                        fullAddr = data.roadAddress;
-                    } else { 
-                        fullAddr = data.jibunAddress;
-                    }
-
-                    if (data.userSelectedType === 'R') {
-                        if (data.bname !== '') {
-                            extraAddr += data.bname;
-                        }
-                        if (data.buildingName !== '') {
-                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                        }
-                        fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-                    }
-
-                    document.getElementById('postcode').value = data.zonecode;
-                    document.getElementById('address').value = fullAddr;
-                    document.getElementById('detailAddress').focus();
-                }
-            }).open();
-        }
-    </script>
+    <div class="signup-container">
+        <h2>회원가입</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- 자동으로 필드 생성 -->
+            <button type="submit">가입하기</button>  <!-- 가입 버튼 -->
+        </form>
+        <a href="{% url '로그인' %}">이미 계정이 있으신가요? 로그인하기</a>
+    </div>
 </body>
 </html>

@@ -21,13 +21,19 @@
             <nav>
                 <ul>
                     <li><a href="{% url '홈' %}">홈</a></li>
-                    <li><a href="{% url '로그인' %}">로그인</a></li>
-                    <li><a href="{% url '회원가입' %}">회원가입</a></li>
-                    <li><a href="{% url '마이페이지' %}">마이페이지</a></li>
+                    
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url '마이페이지' %}">마이페이지</a></li>
+                        <li><a href="{% url '로그아웃' %}">로그아웃</a></li>
+                    {% else %}
+                        <li><a href="{% url '로그인' %}">로그인</a></li>
+                        <li><a href="{% url '회원가입' %}">회원가입</a></li>
+                    {% endif %}
+                    
                     <li><a href="{% url '게시판' %}">게시판</a></li>
                     <li class="btn-quick-menu" onclick="toggleQuickMenu()">바로가기</li>
                 </ul>
-            </nav>
+            </nav>            
             <div class="quick-menu" style="display:none;">
                 <ul>
                     <li><a href="{% url '로그인' %}">로그인</a></li>
@@ -36,9 +42,18 @@
             </div>
         </header>
 
+        <!-- 메시지 영역 추가 -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <main>
             <section class="welcome">
-                <h2>환영합니다!</h2>
+                <h2>환영합니다{% if user.is_authenticated %}, {{ user.username }}{% endif %}!</h2>
                 <p>우리 아파트 커뮤니티에 오신 것을 환영합니다. 주민들과 소통하고 다양한 정보를 공유하세요.</p>
             </section>
 

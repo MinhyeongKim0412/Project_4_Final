@@ -10,8 +10,13 @@
 </head>
 <body>
     <h2>마이페이지</h2>
-    <p>안녕하세요, {{ user.username }}님!</p>
-    <a href="{% url '회원정보수정' %}">회원정보 수정</a>
-    <a href="{% url '회원탈퇴' %}">회원 탈퇴</a>
+    {% if user.is_authenticated %}
+        <p>안녕하세요, {{ user.username }}님!</p>
+        <a href="{% url '회원정보수정' %}">회원정보 수정</a>
+        <a href="{% url '회원탈퇴' %}">회원 탈퇴</a>
+    {% else %}
+        <p>로그인하지 않으셨습니다. <a href="{% url '로그인' %}">로그인</a> 해주세요.</p>
+        <a href="{% url '회원가입' %}">회원가입</a>
+    {% endif %}
 </body>
 </html>

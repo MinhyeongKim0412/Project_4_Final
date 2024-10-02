@@ -20,9 +20,13 @@ WEB
    ├─ media
    ├─ migrations
    │  ├─ 0001_initial.py
+   │  ├─ 0002_comment.py
+   │  ├─ 0003_customuser_address_customuser_detail_address_and_more.py
    │  ├─ __init__.py
    │  └─ __pycache__
    │     ├─ 0001_initial.cpython-312.pyc
+   │     ├─ 0002_comment.cpython-312.pyc
+   │     ├─ 0003_customuser_address_customuser_detail_address_and_more.cpython-312.pyc
    │     └─ __init__.cpython-312.pyc
    ├─ models.py
    ├─ static
@@ -31,10 +35,10 @@ WEB
    │  │  ├─ delete_account.css
    │  │  ├─ find_account.css
    │  │  ├─ login.css
+   │  │  ├─ main.css
    │  │  ├─ mypage.css
    │  │  ├─ post_create.css
    │  │  ├─ post_edit.css
-   │  │  ├─ post_reaction.css
    │  │  ├─ post_view.css
    │  │  ├─ signup.css
    │  │  └─ update_profile.css
@@ -44,10 +48,10 @@ WEB
    │  ├─ delete_account.html
    │  ├─ find_account.html
    │  ├─ login.html
+   │  ├─ main.html
    │  ├─ mypage.html
    │  ├─ post_create.html
    │  ├─ post_edit.html
-   │  ├─ post_reaction.html
    │  ├─ post_view.html
    │  ├─ signup.html
    │  └─ update_profile.html

@@ -111,3 +111,9 @@ TEMPLATES = [
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = '/'  # 로그아웃 후 리디렉션할 URL
+
+# 커스텀 사용자 모델 설정 추가
+AUTH_USER_MODEL = 'Team_3E_apart.CustomUser'

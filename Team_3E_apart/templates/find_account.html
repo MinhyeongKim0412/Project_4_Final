@@ -9,11 +9,23 @@
     <link rel="stylesheet" href="{% static 'css/find_account.css' %}">
 </head>
 <body>
-    <h2>회원정보 찾기</h2>
+    <header>
+        <h2>회원정보 찾기</h2>
+        <nav>
+            <a href="{% url '홈' %}">홈으로</a>  <!-- 홈으로 돌아가는 링크 -->
+            <a href="{% url '로그인' %}">로그인</a>  <!-- 로그인 페이지 링크 -->
+            <a href="{% url '회원가입' %}">회원가입</a>  <!-- 회원가입 페이지 링크 -->
+        </nav>
+    </header>
+    
     <form method="POST">
         {% csrf_token %}
-        <input type="text" name="username" placeholder="아이디" required>
-        <input type="email" name="email" placeholder="이메일" required>
+        <label for="username">아이디:</label>
+        <input type="text" id="username" name="username" placeholder="아이디" required>
+        
+        <label for="email">이메일:</label>
+        <input type="email" id="email" name="email" placeholder="이메일" required>
+        
         <button type="submit">찾기</button>
     </form>
 </body>
