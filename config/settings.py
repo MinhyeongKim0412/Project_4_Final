@@ -53,9 +53,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'apartment_community',
-        'USER': 'root',
+        'USER': 'remote_user',
         'PASSWORD': '1234',
-        'HOST': 'localhost',
+        'HOST': '10.10.21.80',
         'PORT': '3306',
     }
 }
