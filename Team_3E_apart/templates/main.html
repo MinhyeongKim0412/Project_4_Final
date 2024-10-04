@@ -13,95 +13,103 @@
             menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
         }
     </script>
+    <script>
+        function updateTime() {
+            const currentTimeElement = document.getElementById('current-time');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            currentTimeElement.textContent = `${hours}:${minutes}`;  // 시간:분 형식으로 표시
+        }
+    
+        setInterval(updateTime, 1000);  // 매초마다 시간 업데이트
+        updateTime();  // 페이지 로드 시 시간 설정
+    </script>
 </head>
 <body>
     <div class="mobile-screen">
-        <header>
-            <h1>아파트 주민 커뮤니티</h1>
-            <nav>
-                <ul>
-                    <li><a href="{% url '홈' %}">홈</a></li>
-                    
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url '마이페이지' %}">마이페이지</a></li>
-                        <li><a href="{% url '로그아웃' %}">로그아웃</a></li>
-                    {% else %}
-                        <li><a href="{% url '로그인' %}">로그인</a></li>
-                        <li><a href="{% url '회원가입' %}">회원가입</a></li>
-                    {% endif %}
-                    
-                    <li><a href="{% url '게시판' %}">게시판</a></li>
-                    <li class="btn-quick-menu" onclick="toggleQuickMenu()">바로가기</li>
-                </ul>
-            </nav>            
-            <div class="quick-menu" style="display:none;">
-                <ul>
-                    <li><a href="{% url '로그인' %}">로그인</a></li>
-                    <li><a href="{% url '회원가입' %}">회원가입</a></li>
-                </ul>
+        <!-- 상단 상태바 -->
+        <div class="status-bar">
+            <div class="left-icons">
+                <span id="current-time"></span>
+                <span>🔔</span> <!-- 첫 번째 이모지 -->
+                <span>⏰</span> <!-- 두 번째 이모지 -->
+                <span>📅</span> <!-- 세 번째 이모지 -->
+                <span>💬</span> <!-- 네 번째 이모지 -->
             </div>
+            <div class="right-icons">
+                <span>🔊</span> <!-- 두 번째 이모지 -->
+                <span id="battery-level">75%</span> <!-- 배터리 수치, 원하는 값으로 변경 -->
+                <span>🔋</span> <!-- 배터리 아이콘 -->
+                <span>📶</span> <!-- 세 번째 이모지 -->
+            </div>
+        </div>
+
+        <header>
+            <img src="https://img.icons8.com/ios/250/FFFFFF/waypoint-map.png" alt="로고" class="logo">
+            <button class="search-button">🔍</button>
         </header>
 
-        <!-- 메시지 영역 추가 -->
-        {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                    <div class="message">{{ message }}</div>
-                {% endfor %}
-            </div>
-        {% endif %}
+        <!-- 자동 슬라이드 배너 -->
+        <div class="banner">
+            <img src="https://via.placeholder.com/800x150?text=배너+1" alt="배너 1">
+            <img src="https://via.placeholder.com/800x150?text=배너+2" alt="배너 2">
+            <img src="https://via.placeholder.com/800x150?text=배너+3" alt="배너 3">
+        </div>
 
+        <!-- 4열 2행 아이콘 -->
+        <div class="icon-grid">
+            <span>🏡</span>
+            <span>🛍️</span>
+            <span>🏋️‍♂️</span>
+            <span>🛠️</span>
+            <span>🏊‍♂️</span>
+            <span>🚴‍♂️</span>
+            <span>🍽️</span>
+            <span>🧘‍♀️</span>
+        </div>
+
+        <!-- 메인 콘텐츠 -->
         <main>
-            <section class="welcome">
-                <h2>환영합니다{% if user.is_authenticated %}, {{ user.username }}{% endif %}!</h2>
-                <p>우리 아파트 커뮤니티에 오신 것을 환영합니다. 주민들과 소통하고 다양한 정보를 공유하세요.</p>
-            </section>
-
             <section class="container">
-                <div class="box">
-                    <h3>주요 공지사항</h3>
-                    <p>다음 주에 예정된 커뮤니티 미팅이 있습니다. 참여를 원하시면 사전 신청해주세요.</p>
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <h3>공지</h3>
+                        <p>미팅 예정: 사전 신청 필수</p>
+                    </div>
+                    <div class="gallery-item">
+                        <h3>건강 캠페인</h3>
+                        <p>게시판 확인</p>
+                    </div>
+                    <div class="gallery-item">
+                        <h3>편의시설</h3>
+                        <p>이용 가능</p>
+                    </div>
+                    <div class="gallery-item">
+                        <h3>새로운 소식</h3>
+                        <p>소식 확인하기</p>
+                    </div>
                 </div>
-                <div class="box">
-                    <h3>주민 건강 캠페인</h3>
-                    <p>건강을 위한 캠페인이 진행 중입니다. 자세한 사항은 게시판을 확인하세요.</p>
-                </div>
-                <div class="box">
-                    <h3>편의 시설 안내</h3>
-                    <p>우리 아파트의 다양한 편의 시설을 확인하세요! 언제든지 이용 가능합니다.</p>
-                </div>
-            </section>
-
-            <section class="latest-posts">
-                <h2>최신 게시글</h2>
-                <ul>
-                    <li><a href="{% url '글조회' post_id=1 %}">첫 번째 게시글 제목</a> - 2024-10-01</li>
-                    <li><a href="{% url '글조회' post_id=2 %}">두 번째 게시글 제목</a> - 2024-10-02</li>
-                    <li><a href="{% url '글조회' post_id=3 %}">세 번째 게시글 제목</a> - 2024-10-03</li>
-                </ul>
-                <a href="{% url '게시판' %}" class="btn">게시판 바로가기</a>
-            </section>
-
-            <section class="community-rules">
-                <h2>커뮤니티 규칙</h2>
-                <p>우리 커뮤니티는 모든 주민이 안전하고 존중받는 환경에서 소통할 수 있도록 아래의 규칙을 준수해 주시기 바랍니다:</p>
-                <ul>
-                    <li>서로 존중하고 예의 있게 대화합시다.</li>
-                    <li>불법적인 내용이나 악성 게시글은 금지합니다.</li>
-                    <li>타인의 개인정보를 보호해주세요.</li>
-                </ul>
             </section>
         </main>
 
-        <footer>
-            <p>&copy; 2024 아파트 주민 커뮤니티. All rights reserved.</p>
-        </footer>
-
-        <!-- 핸드폰 하단 메뉴바 -->
-        <div class="bottom-nav">
-            <a href="#" class="nav-btn">뒤로가기</a>
-            <a href="#" class="nav-btn">홈</a>
-            <a href="#" class="nav-btn">메뉴</a>
+        <div class="bottom-nav-bar">
+            <!-- 뒤로가기 아이콘 -->
+            <div class="nav-icon" onclick="history.back();">
+                <img src="https://via.placeholder.com/30?text=◀" alt="뒤로가기">
+            </div>
+            <!-- 홈 아이콘 -->
+            <div class="nav-icon">
+                <img src="https://via.placeholder.com/30?text=🏠" alt="홈">
+            </div>
+            <!-- 알림 아이콘 -->
+            <div class="nav-icon">
+                <img src="https://via.placeholder.com/30?text=🔔" alt="알림">
+            </div>
+            <!-- 더보기 아이콘 -->
+            <div class="nav-icon" onclick="toggleQuickMenu();">
+                <img src="https://via.placeholder.com/30?text=⋮" alt="더보기">
+            </div>
         </div>
     </div>
 </body>
