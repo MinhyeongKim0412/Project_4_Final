@@ -9,13 +9,37 @@
     <link rel="stylesheet" href="{% static 'css/post_create.css' %}">
 </head>
 <body>
-    <h2>글 작성</h2>
-    <form method="POST">
-        {% csrf_token %}
-        <input type="text" name="title" placeholder="제목" required>
-        <textarea name="content" placeholder="내용" required></textarea>
-        <button type="submit">작성하기</button>
-    </form>
-    <a href="{% url '게시판' %}">게시판으로 돌아가기</a>
+    <div class="mobile-screen"> <!-- 모바일 화면 스타일을 위한 div 추가 -->
+        <a href="{% url '게시판' %}">
+            <img src="https://cdn-icons-png.flaticon.com/512/122/122633.png" alt="뒤로 가기" class="back-icon"> <!-- 뒤로 가기 아이콘 -->
+        </a>
+        <h2>글 작성</h2>
+        
+        <!-- 토픽 선택 -->
+        <label for="topic">토픽 추가:</label>
+        <select id="topic" name="topic" required>
+            <option value="" disabled selected>토픽을 선택해주세요</option>
+            <option value="사는 얘기">사는 얘기</option>
+            <option value="자랑하기">자랑하기</option>
+            <option value="친목">친목</option>
+            <option value="알립니다">알립니다</option>
+        </select>
+        <br>
+        <!-- 제목 입력 -->
+        <p>제목:</p>
+        <input type="text" name="title" placeholder="제목을 입력해주세요" required>
+        <br>
+        <!-- 내용 입력 -->
+        <p>내용:</p>
+        <textarea name="content" placeholder="내용을 입력해주세요" required></textarea>
+        
+        <!-- 버튼 영역 -->
+        <div class="button-group">
+            <a href="{% url '게시판' %}" style="text-decoration: none;">
+                <button type="button" class="cancel-button">취소하기</button>
+            </a>
+            <button type="submit" class="submit-button">등록</button>
+        </div>
+    </div>
 </body>
 </html>
