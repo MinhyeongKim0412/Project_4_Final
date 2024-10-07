@@ -125,9 +125,11 @@
         <!-- 4열 2행 아이콘 -->
         <div class="icon-grid">
             <div class="icon-item">
-                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/app-development-3d-icon-download-in-png-blend-fbx-gltf-file-formats--programming-application-web-software-website-pack-seo-icons-7794487.png?f=webp" alt="Icon 1" />
-                <p>앱 개발</p>
-            </div>
+                <a href="{% url '게시판' %}">
+                    <img src="https://cdn3d.iconscout.com/3d/premium/thumb/app-development-3d-icon-download-in-png-blend-fbx-gltf-file-formats--programming-application-web-software-website-pack-seo-icons-7794487.png?f=webp" alt="Icon 1" />
+                    <p>게시판</p>
+                </a>
+            </div>            
             <div class="icon-item">
                 <img src="https://cdn-icons-png.flaticon.com/512/10473/10473619.png" alt="Icon 2" />
                 <p>아이콘 2</p>
@@ -216,7 +218,9 @@
             </div>
             <!-- 더보기 아이콘 -->
             <div class="nav-icon" onclick="toggleQuickMenu();">
-                <img src="https://cdn-icons-png.flaticon.com/512/3388/3388823.png" alt="더보기">
+                <a href="{% url '마이페이지' %}">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3388/3388823.png" alt="더보기">
+                </a>
             </div>
         </div>
     </div>
