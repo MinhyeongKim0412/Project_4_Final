@@ -24,7 +24,63 @@
     
         setInterval(updateTime, 1000);  // 매초마다 시간 업데이트
         updateTime();  // 페이지 로드 시 시간 설정
+
+        // 방향키로 가로 스크롤을 제어하는 스크립트
+        document.addEventListener('keydown', function(event) {
+            const gallery = document.querySelector('.gallery');
+            if (event.key === 'ArrowRight') {
+                gallery.scrollBy({ left: 200, behavior: 'smooth' }); // 오른쪽으로 스크롤
+            } else if (event.key === 'ArrowLeft') {
+                gallery.scrollBy({ left: -200, behavior: 'smooth' }); // 왼쪽으로 스크롤
+            }
+        });
+
     </script>
+    <script>
+        // ... 기존 코드 ...
+    
+        // 좌우 버튼 클릭 시 스크롤
+        document.querySelector('.nav-button.left').addEventListener('click', function() {
+            const gallery = document.querySelector('.banner-inner');
+            gallery.scrollBy({ left: -200, behavior: 'smooth' }); // 왼쪽으로 스크롤
+        });
+    
+        document.querySelector('.nav-button.right').addEventListener('click', function() {
+            const gallery = document.querySelector('.banner-inner');
+            gallery.scrollBy({ left: 200, behavior: 'smooth' }); // 오른쪽으로 스크롤
+        });
+    </script>
+    <script>
+        // div사이즈 동적으로 구하기
+        const outer = document.querySelector('.outer');
+        const innerList = document.querySelector('.inner-list');
+        const inners = document.querySelectorAll('.inner');
+        let currentIndex = 0; // 현재 슬라이드 화면 인덱스
+
+        inners.forEach((inner) => {
+            inner.style.width = `${outer.clientWidth}px`; // inner의 width를 모두 outer의 width로 만들기
+        });
+
+        innerList.style.width = `${outer.clientWidth * inners.length}px`; // innerList의 width를 inner의 width * inner의 개수로 만들기
+
+        // 버튼에 이벤트 등록하기
+        const buttonLeft = document.querySelector('.button-left');
+        const buttonRight = document.querySelector('.button-right');
+
+        buttonLeft.addEventListener('click', () => {
+            currentIndex--;
+            currentIndex = currentIndex < 0 ? 0 : currentIndex; // index값이 0보다 작아질 경우 0으로 변경
+            innerList.style.marginLeft = `-${outer.clientWidth * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
+        });
+
+        buttonRight.addEventListener('click', () => {
+            currentIndex++;
+            currentIndex = currentIndex >= inners.length ? inners.length - 1 : currentIndex; // index값이 inner의 총 개수보다 많아질 경우 마지막 인덱스값으로 변경
+            innerList.style.marginLeft = `-${outer.clientWidth * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
+        });
+
+        </script>
+    
 </head>
 <body>
     <div class="mobile-screen">
@@ -51,64 +107,116 @@
         </header>
 
         <!-- 자동 슬라이드 배너 -->
-        <div class="banner">
-            <img src="https://via.placeholder.com/800x150?text=배너+1" alt="배너 1">
-            <img src="https://via.placeholder.com/800x150?text=배너+2" alt="배너 2">
-            <img src="https://via.placeholder.com/800x150?text=배너+3" alt="배너 3">
+        <div class="outer">
+            <div class="inner-list">
+                <div class="inner">
+                    <img src="https://img.freepik.com/free-psd/flat-design-gym-template_23-2151681240.jpg" alt="배너 1" class="slide">
+                </div>
+                <div class="inner">
+                    <img src="https://vrthumb.imagetoday.co.kr/2023/01/03/tit126t0381w7.jpg" alt="배너 2" class="slide">
+                </div>
+                <div class="inner">
+                    <img src="https://vrthumb.imagetoday.co.kr/2023/01/03/tit126t0381w5.jpg" alt="배너 3" class="slide">
+                </div>
+            </div>
         </div>
+
 
         <!-- 4열 2행 아이콘 -->
         <div class="icon-grid">
-            <span>🏡</span>
-            <span>🛍️</span>
-            <span>🏋️‍♂️</span>
-            <span>🛠️</span>
-            <span>🏊‍♂️</span>
-            <span>🚴‍♂️</span>
-            <span>🍽️</span>
-            <span>🧘‍♀️</span>
+            <div class="icon-item">
+                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/app-development-3d-icon-download-in-png-blend-fbx-gltf-file-formats--programming-application-web-software-website-pack-seo-icons-7794487.png?f=webp" alt="Icon 1" />
+                <p>앱 개발</p>
+            </div>
+            <div class="icon-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/10473/10473619.png" alt="Icon 2" />
+                <p>아이콘 2</p>
+            </div>
+            <div class="icon-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/10490/10490224.png" alt="Icon 3" />
+                <p>아이콘 3</p>
+            </div>
+            <div class="icon-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/10473/10473692.png" alt="Icon 4" />
+                <p>아이콘 4</p>
+            </div>
+            <div class="icon-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/10473/10473321.png" alt="Icon 5" />
+                <p>아이콘 5</p>
+            </div>
+            <div class="icon-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/10473/10473656.png" alt="Icon 6" />
+                <p>아이콘 6</p>
+            </div>
+            <div class="icon-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/10473/10473579.png" alt="Icon 7" />
+                <p>아이콘 7</p>
+            </div>
+            <div class="icon-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/10740/10740606.png" alt="Icon 8" />
+                <p>아이콘 8</p>
+            </div>
         </div>
+
 
         <!-- 메인 콘텐츠 -->
         <main>
             <section class="container">
-                <div class="gallery">
-                    <div class="gallery-item">
-                        <h3>공지</h3>
-                        <p>미팅 예정: 사전 신청 필수</p>
+                <div class="gallery-section">
+                    <h3>공지</h3>
+                    <div class="gallery">
+                        <div class="gallery-item">
+                            <img src="https://www.theteams.kr/includes/uploads/recruit/%EC%9A%B0%EB%82%A8%ED%91%B8%EB%A5%B4%EB%AF%B8%EC%95%84%EC%95%84%ED%8C%8C%ED%8A%B8%EC%9E%85%EC%A3%BC%EC%9E%90%EB%8C%80%ED%91%9C%ED%9A%8C%EC%9D%98_20210405.png" alt="공지 1" class="gallery-image">
+                            <div class="gallery-text">미팅 예정: 사전 신청 필수</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://www.jnewstimes.com/data/photos/20240205/art_17067818398463_18e0dc.jpg" alt="공지 2" class="gallery-image">
+                            <div class="gallery-text">행사 일정: 추후 공지</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://openapt.seoul.go.kr/cmm/fms/getImage.do?atchFileId=FILE_000000001160856&fileSn=0" alt="공지 3" class="gallery-image">
+                            <div class="gallery-text">공지사항 업데이트</div>
+                        </div>
                     </div>
-                    <div class="gallery-item">
-                        <h3>건강 캠페인</h3>
-                        <p>게시판 확인</p>
-                    </div>
-                    <div class="gallery-item">
-                        <h3>편의시설</h3>
-                        <p>이용 가능</p>
-                    </div>
-                    <div class="gallery-item">
-                        <h3>새로운 소식</h3>
-                        <p>소식 확인하기</p>
+                </div>
+                <div class="gallery-section">
+                    <h3>편의시설</h3>
+                    <div class="gallery">
+                        <div class="gallery-item">
+                            <img src="https://www.yangsanilbo.com/news/photo/201903/67981_32823_552.jpg" alt="편의시설 1" class="gallery-image">
+                            <div class="gallery-text">이용 가능</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://cdn.imweb.me/upload/S20191014c842471541245/6542a13e4e38f.jpg" alt="편의시설 2" class="gallery-image">
+                            <div class="gallery-text">운영 시간</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://mblogthumb-phinf.pstatic.net/MjAyMzA5MDNfNTIg/MDAxNjkzNzAyNzIyMjYy.uVlbcavyMnKQ7GpGGQKwzUZcOk5lJSXVxsXvCzjm8Msg.iXPOSajV-g04wBDJSqMkd7y-bc-XJd81WsphdQ4CKCsg.JPEG.ryu813578/Screenshot_2023-09-03_at_09.52.33.JPG?type=w800" alt="편의시설 3" class="gallery-image">
+                            <div class="gallery-text">시설 안내</div>
+                        </div>
                     </div>
                 </div>
             </section>
         </main>
+        
+
 
         <div class="bottom-nav-bar">
             <!-- 뒤로가기 아이콘 -->
             <div class="nav-icon" onclick="history.back();">
-                <img src="https://via.placeholder.com/30?text=◀" alt="뒤로가기">
+                <img src="https://cdn-icons-png.flaticon.com/512/0/340.png" alt="뒤로가기">
             </div>
             <!-- 홈 아이콘 -->
             <div class="nav-icon">
-                <img src="https://via.placeholder.com/30?text=🏠" alt="홈">
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="홈">
             </div>
             <!-- 알림 아이콘 -->
             <div class="nav-icon">
-                <img src="https://via.placeholder.com/30?text=🔔" alt="알림">
+                <img src="https://cdn-icons-png.flaticon.com/512/565/565422.png" alt="알림">
             </div>
             <!-- 더보기 아이콘 -->
             <div class="nav-icon" onclick="toggleQuickMenu();">
-                <img src="https://via.placeholder.com/30?text=⋮" alt="더보기">
+                <img src="https://cdn-icons-png.flaticon.com/512/3388/3388823.png" alt="더보기">
             </div>
         </div>
     </div>
