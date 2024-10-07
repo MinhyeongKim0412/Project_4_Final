@@ -4,46 +4,149 @@
 /* 전체 스타일 */
 body {
     font-family: 'Pretendard Variable', '나눔고딕', sans-serif; /* 프리텐다드 폰트와 나눔고딕 폰트 적용 */
-    background-color: #f8f8f8; /* 배경색 */
-    color: #333; /* 텍스트 색상 */
-    margin: 0;
+    line-height: 1.6;
+    background: linear-gradient(45deg, rgba(255, 214, 151, 0.8), rgba(255, 255, 204, 0.8), rgba(178, 255, 178, 0.8)); /* 연한 주황, 노랑, 연한 연두색의 사선 그라데이션 */
+    color: #333; /* 기본 글자 색상 */
     padding: 20px;
+    display: flex;
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+}
+
+/* 모바일 화면 느낌의 둥근 사각형, 세로가 긴 직사각형으로 조정 */
+.mobile-screen {
+    width: 600px; /* 스마트폰 화면처럼 세로로 긴 직사각형 */
+    height: 85vh; /* 화면 높이의 80% 차지 */
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 30px;
+    overflow-y: auto; /* 세로 스크롤 가능하게 설정 */
+    overflow-x: hidden; /* 가로 스크롤 비활성화 */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #ddd;
+    padding: 40px; /* 안쪽 여백 추가 (값 조정 가능) */
+}
+
+
+.author-info {
+    display: flex; /* 작성자 정보 가로 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    margin: 20px 0; /* 위아래 여백 */
+}
+
+.profile-pic {
+    width: 50px; /* 프로필 사진 너비 */
+    height: 50px; /* 프로필 사진 높이 */
+    border-radius: 50%; /* 원형으로 만들기 */
+    margin-right: 15px; /* 프로필 사진과 텍스트 간격 */
+}
+
+.author-details {
+    line-height: 1.4; /* 작성자 정보 텍스트 간격 조정 */
+}
+
+h1 {
+    font-size: 35px; /* 제목 크기 조정 */
 }
 
 h2 {
-    color: #007bff; /* 제목 색상 */
+    color: #ff6f30; /* 제목 색상 변경: 주황색 */
+    font-size: 24px; /* 제목 크기 조정 */
+}
+
+h3 {
+    margin-top: 20px; /* 제목과 내용 간격 */
+    font-size: 20px; /* 부제목 크기 */
 }
 
 p {
     line-height: 1.6;
 }
 
+/* 좋아요/싫어요 버튼 스타일 */
 .reaction-buttons {
     margin-top: 20px;
+    display: flex; /* 버튼을 가로로 정렬 */
+    justify-content: flex-end; /* 버튼을 오른쪽 정렬 */
 }
 
+.reaction-button {
+    background: none; /* 배경색 없음 */
+    border: none; /* 테두리 없음 */
+    cursor: pointer; /* 커서 포인터 변경 */
+    display: flex; /* 아이콘과 텍스트를 가로로 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    font-size: 16px; /* 폰트 크기 */
+    color: #ff6f30; /* 아이콘 색상 */
+    transition: color 0.3s; /* 색상 변화 효과 */
+    margin-right: 10px; /* 버튼 간격 조정 */
+}
+
+.reaction-button img {
+    width: 1em; /* 글자 크기에 맞게 설정 */
+    height: 1em; /* 글자 크기에 맞게 설정 */
+    margin-right: 5px; /* 아이콘과 텍스트 간격 */
+}
+
+.reaction-button:hover {
+    color: #e65c26; /* 호버 시 색상 변화 */
+}
+
+.reaction-count {
+    margin-top: 10px; /* 좋아요/싫어요 수 위 여백 */
+    text-align: right; /* 오른쪽 정렬 */
+}
+
+
+.comments {
+    margin-top: 20px; /* 댓글 섹션 위 여백 */
+}
+
+.comment {
+    margin-bottom: 10px; /* 댓글 간격 */
+    padding: 10px 30px; /* 상하 10px, 좌우 30px 내부 여백 */
+    border: 1px solid #ccc; /* 댓글 테두리 */
+    border-radius: 5px; /* 댓글 모서리 둥글게 */
+    background: #f9f9f9; /* 댓글 배경색 */
+}
+
+
+.comment-count {
+    text-align: left; /* 댓글 수 왼쪽 정렬 */
+    margin-top: 10px; /* 댓글 수 위 여백 */
+}
+.horizontal-divider {
+    height: 1px; /* 구분선의 두께 */
+    background-color: #707070; /* 구분선의 색상 (회색) */
+    margin: 20px 0; /* 위아래 여백 */
+    width: 80%; /* 구분선의 너비 (100%로 설정하여 가로로 늘리기) */
+}
+/* 댓글 작성 시간 글자색 회색 */
+.time-ago {
+    color: #888; /* 회색 */
+    font-size: 0.9em; /* 글자 크기 살짝 줄이기 */
+}
+
+/* 댓글 작성자 이름 볼드 처리 */
+.comment-author {
+    font-weight: bold; /* 볼드 처리 */
+    font-size: 1em; /* 기본 글자 크기 */
+}
+
+/* 댓글 내용 글자 크기 줄이기 */
+.comment-content {
+    font-size: 0.9em; /* 글자 크기 줄이기 */
+    line-height: 1.4; /* 줄 간격 조금 더 좁게 */
+}
 button {
-    background-color: #007bff; /* 버튼 배경색 */
-    color: white; /* 버튼 텍스트 색상 */
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    font-family: 'Pretendard Variable', '나눔고딕', sans-serif; /* Pretendard 폰트 적용 */
 }
-
-button:hover {
-    background-color: #0056b3; /* 버튼 호버 색상 */
-}
-
-a {
-    display: inline-block;
-    margin-top: 10px;
-    color: #007bff; /* 링크 색상 */
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-a:hover {
-    color: #0056b3; /* 링크 호버 색상 */
+.back-icon {
+    width: 30px;                 /* 아이콘 크기 */
+    height: 30px;                /* 아이콘 높이 */
+    margin-right: 10px;          /* 아이콘과 텍스트 간의 간격 */
+    margin-bottom: 15px;          /* 아이콘 아래 마진 추가 (값은 조정 가능) */
 }

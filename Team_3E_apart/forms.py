@@ -27,3 +27,9 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={'placeholder': '댓글을 입력하세요'})  # placeholder 속성 추가 (선택 사항)
+        }
+        labels = {
+            'content': '',  # 'Content:' 레이블을 없앰
+        }
