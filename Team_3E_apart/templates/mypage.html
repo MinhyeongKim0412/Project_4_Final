@@ -22,21 +22,26 @@
         </div>
 
         <h2>안녕하세요, {{ user.username }}님,<br> 오늘도 즐거운 하루 되세요 :)</h2>
-        <div class="horizontal-divider"></div>        
+        <div class="horizontal-divider"></div>      
+        
+        
         <div class="stats">
             <div class="stat">
                 <span class="stat-title">나의 작성 게시물 수</span>
-                <span class="stat-number" onclick="changeColor(this)">10</span>
+                <a href="{% url '내게시물' %}" class="stat-number" onclick="changeColor(this)">10</a>
             </div>
             <div class="stat">
                 <span class="stat-title">댓글 수</span>
-                <span class="stat-number" onclick="changeColor(this)">5</span>
+                <a href="{% url '내댓글' %}" class="stat-number" onclick="changeColor(this)">5</a>
             </div>
             <div class="stat">
                 <span class="stat-title">좋아요한 게시물</span>
-                <span class="stat-number" onclick="changeColor(this)">8</span>
+                <a href="{% url '내좋아요누른게시물' %}" class="stat-number" onclick="changeColor(this)">8</a>
             </div>
         </div>
+        
+
+
         <div class="horizontal-divider"></div>
         <div class="icon-links">
             <div class="icon-link">

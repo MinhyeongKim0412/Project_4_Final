@@ -17,4 +17,7 @@ urlpatterns = [
     path('post/create/', views.post_create_view, name='글작성'),
     path('post/edit/<int:post_id>/', views.post_edit_view, name='글수정'),
     path('post/<int:post_id>/', views.post_view, name='글조회'),
+    path('mypage_posts/', views.my_posts_view, name='내게시물'),  # 내 게시물
+    path('mypage_comments/', views.my_comments_view, name='내댓글'),  # 내 댓글
+    path('mypage_liked_posts/', views.my_liked_posts_view, name='내좋아요누른게시물'),  # 내 좋아요 누른 게시물
 ]

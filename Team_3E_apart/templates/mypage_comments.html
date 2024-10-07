@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 댓글 목록</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/mypage_comments.css' %}"> <!-- 스타일 시트 연결 -->
+</head>
+<body>
+    <div class="mobile-screen">
+        <!-- 1행: 뒤로가기 버튼 -->
+        <a href="{% url '홈' %}">
+            <img src="https://cdn-icons-png.flaticon.com/512/122/122633.png" alt="뒤로 가기" class="back-icon"> <!-- 뒤로 가기 아이콘 -->
+        </a>
+        
+        <!-- 1행: 제목 -->
+        <h2>나의 작성 댓글 목록</h2>
+
+        <!-- 2행: 게시물 통계 -->
+        <div class="stats">
+            <div class="stat">
+                <a href="{% url '내게시물' %}" class="stat-title">게시물</a>
+                <a href="{% url '내게시물' %}" class="stat-number">1</a>
+            </div>
+            <div class="stat">
+                <a href="{% url '내댓글' %}" class="stat-title">댓글</a>
+                <a href="{% url '내댓글' %}" class="stat-number">{{ comments.count }}</a>
+            </div>
+            <div class="stat">
+                <a href="{% url '내좋아요누른게시물' %}" class="stat-title">좋아요</a>
+                <a href="{% url '내좋아요누른게시물' %}" class="stat-number">15</a>
+            </div>
+        </div>
+
+        <!-- 3행: 내가 작성한 댓글 -->
+        <div class="my-comments">
+            {% if comments %}
+                <h3>{{ comments.count }}개의 작성한 댓글이 있습니다.</h3>
+                {% for comment in comments %}
+                    <div class="comment">
+                        <p class="comment-content"><strong>{{ comment.content }}</strong></p>
+                        <p class="comment-date" style="color: gray; font-size: 0.9em;">{{ comment.created_at|date:"Y/m/d H:i" }}</p>
+                        <p class="post-title">{{ comment.post.title }} <span class="comment-count" style="background-color: lightgray; padding: 2px 5px; border-radius: 5px;">{{ comment.post.comment_count }}</span></p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>작성한 댓글이 없습니다.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

@@ -157,3 +157,24 @@ def update_profile_view(request):
         messages.success(request, '회원정보가 성공적으로 수정되었습니다.')  # 성공 메시지
         return redirect('마이페이지')  # 수정 후 마이페이지로 리다이렉트
     return render(request, 'update_profile.html')  # GET 요청 시 수정 폼 반환
+
+# 내 게시물 뷰
+@login_required  # 로그인한 사용자만 접근 가능
+def my_posts_view(request):
+    # 현재 사용자의 게시물 가져오기
+    posts = Post.objects.filter(author=request.user)  # 현재 사용자에 의해 작성된 게시물
+    return render(request, 'mypage_posts.html', {'posts': posts})  # 게시물 템플릿 렌더링
+
+# 내 댓글 뷰
+@login_required  # 로그인한 사용자만 접근 가능
+def my_comments_view(request):
+    # 현재 사용자가 작성한 댓글 가져오기
+    comments = Comment.objects.filter(author=request.user)  # 현재 사용자에 의해 작성된 댓글
+    return render(request, 'mypage_comments.html', {'comments': comments})  # 댓글 템플릿 렌더링
+
+# 내 좋아요 누른 게시물 뷰
+@login_required  # 로그인한 사용자만 접근 가능
+def my_liked_posts_view(request):
+    # 현재 사용자가 좋아요 누른 게시물 가져오기
+    liked_posts = Post.objects.filter(likes=request.user)  # 현재 사용자가 좋아요 누른 게시물
+    return render(request, 'mypage_liked_posts.html')  # 좋아요 누른 게시물 템플릿 렌더링

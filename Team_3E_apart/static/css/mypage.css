@@ -109,7 +109,9 @@ h2 {
     color: #333; /* 기본 색상 */
     cursor: pointer; /* 클릭 가능한 커서 */
     font-weight: bold; /* 글자 굵게 설정 */
+    text-decoration: none; /* 밑줄 제거 */
 }
+
 
 /* 아이콘 링크 스타일 */
 .icon-links {
