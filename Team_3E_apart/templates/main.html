@@ -5,108 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>아파트 주민 커뮤니티</title>
     {% load static %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
-    <link rel="stylesheet" href="{% static 'css/main.css' %}"> <!-- 스타일 시트 연결 -->
-    <script>
-        function toggleQuickMenu() {
-            const menu = document.querySelector('.quick-menu');
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        }
-    </script>
-    <script>
-        function updateTime() {
-            const currentTimeElement = document.getElementById('current-time');
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            currentTimeElement.textContent = `${hours}:${minutes}`;  // 시간:분 형식으로 표시
-        }
-    
-        setInterval(updateTime, 1000);  // 매초마다 시간 업데이트
-        updateTime();  // 페이지 로드 시 시간 설정
-
-        // 방향키로 가로 스크롤을 제어하는 스크립트
-        document.addEventListener('keydown', function(event) {
-            const gallery = document.querySelector('.gallery');
-            if (event.key === 'ArrowRight') {
-                gallery.scrollBy({ left: 200, behavior: 'smooth' }); // 오른쪽으로 스크롤
-            } else if (event.key === 'ArrowLeft') {
-                gallery.scrollBy({ left: -200, behavior: 'smooth' }); // 왼쪽으로 스크롤
-            }
-        });
-
-    </script>
-    <script>
-        // ... 기존 코드 ...
-    
-        // 좌우 버튼 클릭 시 스크롤
-        document.querySelector('.nav-button.left').addEventListener('click', function() {
-            const gallery = document.querySelector('.banner-inner');
-            gallery.scrollBy({ left: -200, behavior: 'smooth' }); // 왼쪽으로 스크롤
-        });
-    
-        document.querySelector('.nav-button.right').addEventListener('click', function() {
-            const gallery = document.querySelector('.banner-inner');
-            gallery.scrollBy({ left: 200, behavior: 'smooth' }); // 오른쪽으로 스크롤
-        });
-    </script>
-    <script>
-        // div사이즈 동적으로 구하기
-        const outer = document.querySelector('.outer');
-        const innerList = document.querySelector('.inner-list');
-        const inners = document.querySelectorAll('.inner');
-        let currentIndex = 0; // 현재 슬라이드 화면 인덱스
-
-        inners.forEach((inner) => {
-            inner.style.width = `${outer.clientWidth}px`; // inner의 width를 모두 outer의 width로 만들기
-        });
-
-        innerList.style.width = `${outer.clientWidth * inners.length}px`; // innerList의 width를 inner의 width * inner의 개수로 만들기
-
-        // 버튼에 이벤트 등록하기
-        const buttonLeft = document.querySelector('.button-left');
-        const buttonRight = document.querySelector('.button-right');
-
-        buttonLeft.addEventListener('click', () => {
-            currentIndex--;
-            currentIndex = currentIndex < 0 ? 0 : currentIndex; // index값이 0보다 작아질 경우 0으로 변경
-            innerList.style.marginLeft = `-${outer.clientWidth * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
-        });
-
-        buttonRight.addEventListener('click', () => {
-            currentIndex++;
-            currentIndex = currentIndex >= inners.length ? inners.length - 1 : currentIndex; // index값이 inner의 총 개수보다 많아질 경우 마지막 인덱스값으로 변경
-            innerList.style.marginLeft = `-${outer.clientWidth * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
-        });
-
-        </script>
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/main.js' %}"></script>
 </head>
 <body>
     <div class="mobile-screen">
-        <!-- 상단 상태바 -->
         <div class="status-bar">
             <div class="left-icons">
                 <span id="current-time"></span>
-                <span>🔔</span> <!-- 첫 번째 이모지 -->
-                <span>⏰</span> <!-- 두 번째 이모지 -->
-                <span>📅</span> <!-- 세 번째 이모지 -->
-                <span>💬</span> <!-- 네 번째 이모지 -->
+                <span>🔔</span>
+                <span>⏰</span>
+                <span>📅</span>
+                <span>💬</span>
             </div>
             <div class="right-icons">
-                <span>🔊</span> <!-- 두 번째 이모지 -->
-                <span id="battery-level">75%</span> <!-- 배터리 수치, 원하는 값으로 변경 -->
-                <span>🔋</span> <!-- 배터리 아이콘 -->
-                <span>📶</span> <!-- 세 번째 이모지 -->
+                <span>🔊</span>
+                <span id="battery-level">75%</span>
+                <span>🔋</span>
+                <span>📶</span>
             </div>
         </div>
-
         <header>
-            <img src="https://img.icons8.com/ios/250/FFFFFF/waypoint-map.png" alt="로고" class="logo">
+            <img src="https://mblogthumb-phinf.pstatic.net/MjAxODA5MjBfMjUz/MDAxNTM3NDExNDI5Njkx.h7tU2hXwycqD8QqQh_kt6S22wumbpTVBtlvxo2TJkIcg.hb_hXEax3pxzNYMAHBIBhlj2v602muJCmtDcFmgKv1wg.PNG.dnduf75/%EB%A1%9C%EA%B3%A0%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%ED%95%9C%EA%B5%AD%EC%A0%84%EB%A0%A5%EA%B3%B5%EC%82%AC%EB%A1%9C%EA%B3%A0-5.png?type=w800" alt="로고" class="logo">
             <button class="search-button">🔍</button>
         </header>
-
-        <!-- 자동 슬라이드 배너 -->
         <div class="outer">
             <div class="inner-list">
                 <div class="inner">
@@ -120,22 +43,19 @@
                 </div>
             </div>
         </div>
-
-
-        <!-- 4열 2행 아이콘 -->
         <div class="icon-grid">
             <div class="icon-item">
                 <a href="{% url '게시판' %}">
                     <img src="https://cdn3d.iconscout.com/3d/premium/thumb/app-development-3d-icon-download-in-png-blend-fbx-gltf-file-formats--programming-application-web-software-website-pack-seo-icons-7794487.png?f=webp" alt="Icon 1" />
                     <p>커뮤니티 게시판</p>
                 </a>
-            </div>            
+            </div>
             <div class="icon-item">
                 <a href="{% url '로그인' %}">
                     <img src="https://cdn-icons-png.flaticon.com/512/10473/10473619.png" alt="Icon 2" />
                     <p>로그인</p>
                 </a>
-            </div>            
+            </div>
             <div class="icon-item">
                 <a href="{% url '요금계산기' %}">
                     <img src="https://cdn-icons-png.flaticon.com/512/10490/10490224.png" alt="Icon 3" />
@@ -173,11 +93,6 @@
                 </a>
             </div>
         </div>
-
-
-
-
-        <!-- 메인 콘텐츠 -->
         <main>
             <section class="container">
                 <div class="gallery-section">
@@ -216,23 +131,16 @@
                 </div>
             </section>
         </main>
-        
-
-
         <div class="bottom-nav-bar">
-            <!-- 뒤로가기 아이콘 -->
             <div class="nav-icon" onclick="history.back();">
                 <img src="https://cdn-icons-png.flaticon.com/512/0/340.png" alt="뒤로가기">
             </div>
-            <!-- 홈 아이콘 -->
             <div class="nav-icon">
                 <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="홈">
             </div>
-            <!-- 알림 아이콘 -->
             <div class="nav-icon">
                 <img src="https://cdn-icons-png.flaticon.com/512/565/565422.png" alt="알림">
             </div>
-            <!-- 더보기 아이콘 -->
             <div class="nav-icon" onclick="toggleQuickMenu();">
                 <a href="{% url '마이페이지' %}">
                     <img src="https://cdn-icons-png.flaticon.com/512/3388/3388823.png" alt="더보기">
