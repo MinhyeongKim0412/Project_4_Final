@@ -18,8 +18,16 @@
         </div>
         
         <div class="profile">
-            <img src="https://cdn-icons-png.flaticon.com/512/10337/10337609.png" alt="프로필 사진" class="profile-pic"> <!-- 프로필 사진 -->
+            <a href="{% url '프로필사진업로드' %}"> <!-- 프로필 사진 업로드 URL로 이동 -->
+                {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" alt="프로필 사진" class="profile-pic"> <!-- 프로필 사진 -->
+                {% else %}
+                    <img src="https://cdn-icons-png.flaticon.com/512/10337/10337609.png" alt="기본 프로필 사진" class="profile-pic"> <!-- 기본 프로필 사진 -->
+                {% endif %}
+            </a>
         </div>
+        
+        
 
         <h2>안녕하세요, {{ user.username }}님,<br> 오늘도 즐거운 하루 되세요 :)</h2>
         <div class="horizontal-divider"></div>      

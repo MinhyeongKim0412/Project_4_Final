@@ -42,7 +42,10 @@
                     <div class="comment">
                         <p class="comment-content"><strong>{{ comment.content }}</strong></p>
                         <p class="comment-date" style="color: gray; font-size: 0.9em;">{{ comment.created_at|date:"Y/m/d H:i" }}</p>
-                        <p class="post-title">{{ comment.post.title }} <span class="comment-count" style="background-color: lightgray; padding: 2px 5px; border-radius: 5px;">{{ comment.post.comment_count }}</span></p>
+                        <p class="post-title">
+                            <a href="{% url '글조회' comment.post.id %}">{{ comment.post.title }}</a> <!-- 제목 클릭 시 해당 게시물로 이동 -->
+                            <span class="comment-count" style="background-color: lightgray; padding: 2px 5px; border-radius: 5px;">{{ comment.post.comment_count }}</span>
+                        </p>
                     </div>
                 {% endfor %}
             {% else %}

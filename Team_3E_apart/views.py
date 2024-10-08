@@ -4,7 +4,7 @@ from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required  # 로그인 필요 데코레이터 추가
-from .forms import CustomUserCreationForm, PostForm, CommentForm  # 커스텀 사용자 생성 폼 및 게시글 작성을 위한 폼 import
+from .forms import CustomUserCreationForm, PostForm, CommentForm, ProfilePictureForm  # 커스텀 사용자 생성 폼 및 게시글 작성을 위한 폼 import
 from .models import CustomUser, Post, Comment, Like, Dislike  # Post 모델 import
 
 def main(request):
@@ -178,22 +178,30 @@ def update_profile_view(request):
 # 내 게시물 뷰
 @login_required  # 로그인한 사용자만 접근 가능
 def my_posts_view(request):
+    sort_option = request.GET.get('sort', 'latest')  # 정렬 기준을 GET 파라미터에서 가져옴
+    
     # 현재 사용자의 게시물 가져오기
-    posts = Post.objects.filter(author=request.user)  # 현재 사용자에 의해 작성된 게시물
+    if sort_option == 'oldest':
+        posts = Post.objects.filter(author=request.user).order_by('created_at')  # 오래된 순
+    else:
+        posts = Post.objects.filter(author=request.user).order_by('-created_at')  # 최신순
+    
     post_count = posts.count()  # 게시물 수
     # 현재 사용자가 작성한 댓글 수 가져오기
     comment_count = Comment.objects.filter(author=request.user).count()  # 현재 사용자에 의해 작성된 댓글 수
+    
     return render(request, 'mypage_posts.html', {
         'posts': posts,
         'post_count': post_count,
         'comment_count': comment_count  # 댓글 수 전달
     })  # 게시물 템플릿 렌더링
 
+
 # 내 댓글 뷰
 @login_required  # 로그인한 사용자만 접근 가능
 def my_comments_view(request):
-    # 현재 사용자가 작성한 댓글 가져오기
-    comments = Comment.objects.filter(author=request.user)  # 현재 사용자에 의해 작성된 댓글
+    # 현재 사용자가 작성한 댓글 가져오기 (관련된 게시물 정보도 함께 가져옴)
+    comments = Comment.objects.select_related('post').filter(author=request.user)  # 현재 사용자에 의해 작성된 댓글
     comment_count = comments.count()  # 댓글 수
     # 현재 사용자가 작성한 게시물 수 가져오기
     post_count = Post.objects.filter(author=request.user).count()  # 현재 사용자에 의해 작성된 게시물 수
@@ -202,6 +210,7 @@ def my_comments_view(request):
         'comment_count': comment_count,  # 댓글 수 전달
         'post_count': post_count  # 게시물 수 전달
     })  # 댓글 템플릿 렌더링
+
 
 # 내 좋아요 누른 게시물 뷰
 @login_required  # 로그인한 사용자만 접근 가능
@@ -287,3 +296,44 @@ def undislike_post(request, post_id):
         return JsonResponse({'status': 'undisliked', 'dislikes': post.dislikes})
     
     return JsonResponse({'status': 'not_disliked'}, status=404)
+
+# 프로필 사진
+@login_required
+def profile(request):
+    user = request.user
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('프로필사진')  # URL 이름에 맞게 변경
+    else:
+        form = ProfilePictureForm(instance=user)
+
+    return render(request, 'profile.html', {'form': form})
+
+# 프로필 사진 업로드
+@login_required
+def upload_profile_picture(request):
+    user = request.user
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '프로필 사진이 성공적으로 업로드되었습니다.')  # 성공 메시지
+            return redirect('마이페이지')  # 마이페이지로 리다이렉트
+    else:
+        form = ProfilePictureForm(instance=user)
+
+    return render(request, 'upload_profile_picture.html', {'form': form})  # 템플릿 렌더링
+
+# 프로필 사진 삭제
+@login_required
+def delete_profile_picture(request):
+    user = request.user
+    if request.method == 'POST':
+        user.profile_picture.delete()  # 기존 프로필 사진 파일 삭제
+        user.profile_picture = None  # DB에서 프로필 사진 필드 비우기
+        user.save()  # 변경 사항 저장
+        return redirect('마이페이지')  # 적절한 리다이렉트 URL로 변경
+
+    return redirect('마이페이지')  # GET 요청의 경우 리다이렉트

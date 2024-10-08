@@ -98,3 +98,13 @@ select:focus {
     border-color: #007BFF; /* 포커스 시 경계선 색상 변화 */
     outline: none; /* 기본 포커스 아웃라인 제거 */
 }
+.post-title a {
+    text-decoration: none !important; /* 링크의 기본 밑줄 제거 */
+    color: #333 !important; /* 원하는 색상으로 설정 (검정색) */
+    font-size: 1em; /* 제목의 크기 설정 */
+}
+
+.post-title a:hover {
+    color: #007BFF; /* 호버 시 색상 변경 (선택적) */
+}
+

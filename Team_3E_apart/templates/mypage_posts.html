@@ -32,15 +32,22 @@
             </div>
         </div>
 
-
         <!-- 3행: 게시물 조회 옵션 -->
         <div class="post-filter">
             <label for="sort">정렬 기준: </label>
-            <select id="sort">
-                <option value="latest">최신순</option>
-                <option value="oldest">오래된 순</option>
+            <select id="sort" onchange="sortPosts()">
+                <option value="latest" {% if request.GET.sort == 'latest' %}selected{% endif %}>최신순</option>
+                <option value="oldest" {% if request.GET.sort == 'oldest' %}selected{% endif %}>오래된 순</option>
             </select>
         </div>
+
+        <script>
+            function sortPosts() {
+                const sortValue = document.getElementById('sort').value;
+                window.location.href = "?sort=" + sortValue;  // 선택된 정렬 기준을 GET 파라미터로 추가
+            }
+        </script>
+
 
         <!-- 4행: 내가 작성한 게시물 -->
         <div class="my-posts">
@@ -48,7 +55,9 @@
                 <h3>{{ posts.count }}개의 작성한 게시물이 있습니다.</h3>
                 {% for post in posts %}
                     <div class="post">
-                        <p class="post-title"><strong>{{ post.title }}</strong></p>
+                        <p class="post-title">
+                            <a href="{% url '글조회' post.id %}"><strong>{{ post.title }}</strong></a> <!-- 제목 클릭 시 게시물 상세 조회 페이지로 이동 -->
+                        </p>
                         <p class="post-date" style="color: gray; font-size: 0.9em;">{{ post.created_at|date:"Y/m/d H:i" }}</p>
                         <p class="post-content">{{ post.content|truncatewords:20 }}</p> <!-- 내용 일부만 표시 -->
                     </div>

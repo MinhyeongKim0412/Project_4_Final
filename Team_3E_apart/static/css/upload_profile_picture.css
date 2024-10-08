@@ -1,0 +1,94 @@
+/* 웹폰트 불러오기 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+/* 전체 스타일 */
+body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(45deg, rgba(255, 214, 151, 0.8), rgba(255, 255, 204, 0.8), rgba(178, 255, 178, 0.8)); /* 연한 주황, 노랑, 연한 연두색의 사선 그라데이션 */
+    color: #333; /* 기본 글자 색상 */
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+}
+
+/* 모바일 화면 느낌의 둥근 사각형, 세로가 긴 직사각형으로 조정 */
+.mobile-screen {
+    width: 90%; /* 모바일 화면에 적합하게 조정 */
+    max-width: 600px; /* 최대 너비 */
+    height: 85vh; /* 세로 길이를 85vh로 고정 */
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 세로 중앙 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+    border: 2px solid #ddd;
+    padding: 40px; /* 안쪽 여백 추가 (값 조정 가능) */
+}
+
+/* h2 태그 스타일 */
+h2 {
+    color: #ff7f50; /* 주황색 글씨 */
+    margin-bottom: 20px; /* 아래쪽 여백 추가 */
+}
+
+/* 버튼 스타일 */
+button {
+    background-color: #ff7f50; /* 주황색 배경 */
+    color: #fff; /* 흰색 글자 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    padding: 10px 20px; /* 패딩 */
+    cursor: pointer; /* 커서 모양 변경 */
+    font-family: "Pretendard Variable", Pretendard, sans-serif; /* 프리텐다드 폰트 적용 */
+    font-size: 16px; /* 글자 크기 */
+    margin: 20px auto; /* 위쪽 여백 및 수평 중앙 정렬 */
+    display: block; /* 블록 요소로 변경하여 중앙 정렬 */
+    transition: background-color 0.3s; /* 배경색 변화 효과 */
+}
+
+/* 버튼 호버 효과 */
+button:hover {
+    background-color: #ff6347; /* 조금 더 진한 주황색으로 변화 */
+}
+
+
+/* 취소 링크 스타일 */
+a {
+    color: #ff6347; /* 주황색 */
+    text-decoration: none; /* 밑줄 없음 */
+    margin-top: 10px; /* 위쪽 여백 */
+}
+
+/* 취소 링크 호버 효과 */
+a:hover {
+    text-decoration: underline; /* 밑줄 추가 */
+}
+
+/* 폼 필드 스타일 */
+form div {
+    width: 100%; /* 필드가 모바일 화면에 맞게 확장 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+/* 폼 요소 스타일 */
+form label {
+    font-family: "Pretendard Variable", Pretendard, sans-serif; /* 프리텐다드 폰트 적용 */
+    font-size: 16px; /* 글자 크기 */
+    margin-bottom: 10px; /* 아래쪽 여백 */
+    display: block; /* 블록 요소로 설정하여 줄바꿈 */
+}
+
+/* 입력 필드 스타일 */
+form input[type="file"] {
+    font-family: "Pretendard Variable", Pretendard, sans-serif; /* 프리텐다드 폰트 적용 */
+    font-size: 16px; /* 글자 크기 */
+    margin-top: 10px; /* 위쪽 여백 추가 */
+}
+

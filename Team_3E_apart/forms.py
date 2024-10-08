@@ -42,3 +42,8 @@ class CommentForm(forms.ModelForm):
         labels = {
             'content': '',  # 'Content:' 레이블을 없앰
         }
+
+class ProfilePictureForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['profile_picture']

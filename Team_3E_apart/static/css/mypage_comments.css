@@ -99,3 +99,12 @@ body {
     margin-right: 10px; /* 아이콘과 텍스트 간의 간격 */
     margin-bottom: 15px; /* 아이콘 아래 마진 추가 (값은 조정 가능) */
 }
+.comment.post.title a {
+    text-decoration: none !important; /* 링크의 기본 밑줄 제거 */
+    color: #333 !important; /* 원하는 색상으로 설정 (검정색) */
+    font-size: 1em; /* 제목의 크기 설정 */
+}
+
+.comment.post.title a:hover {
+    color: #007BFF; /* 호버 시 색상 변경 (선택적) */
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필 사진 업로드</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/upload_profile_picture.css' %}">
+</head>
+<body>
+    <div class="mobile-screen"> <!-- 모바일 스크린 클래스를 추가한 div -->
+        <h2>프로필 사진 업로드</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <label for="{{ form.profile_picture.id_for_label }}">프로필 사진:</label>
+                <br>
+                {{ form.profile_picture }}  <!-- 파일 업로드 필드 -->
+                <br>
+            </div>
+            <button type="submit">파일 업로드</button>
+        </form>
+        <!-- 프로필 사진 삭제 폼 추가 -->
+        <form method="POST" action="{% url '프로필사진삭제' %}">
+            {% csrf_token %}
+            <button type="submit" style="background-color: #ff6347; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">프로필 사진 삭제</button>
+        </form>
+
+        <a href="{% url '마이페이지' %}">취소</a> <!-- 마이페이지로 돌아가기 -->
+    </div>
+</body>
+</html>

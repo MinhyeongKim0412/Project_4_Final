@@ -1,6 +1,8 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.main, name='홈'),
@@ -24,4 +26,7 @@ urlpatterns = [
     path('unlike/<int:post_id>/', views.unlike_post, name='좋아요취소'),  # 좋아요 취소
     path('dislike/<int:post_id>/', views.dislike_post, name='싫어요'),  # 싫어요 추가
     path('undislike/<int:post_id>/', views.undislike_post, name='싫어요취소'),  # 싫어요 취소
-]
+    path('profile/', views.profile, name='프로필사진'),
+    path('profile/upload/', views.upload_profile_picture, name='프로필사진업로드'),
+    path('profile/delete/', views.delete_profile_picture, name='프로필사진삭제'),  # 프로필 사진 삭제 URL 추가
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # 미디어 파일 서빙 설정

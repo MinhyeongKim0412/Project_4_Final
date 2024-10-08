@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 from django.contrib.auth import get_user_model
 
-# 사용자 모델 커스터마이징 (로그인, 회원가입, 회원 정보 관리 등)
 class CustomUser(AbstractUser):
     apartment_number = models.CharField(max_length=10, blank=True, null=True)  # 아파트 번호 추가
     phone = models.CharField(max_length=15, blank=False, default='000-0000-0000')  # 전화번호 필드에 기본값 추가
@@ -10,6 +9,7 @@ class CustomUser(AbstractUser):
     address = models.CharField(max_length=255, blank=False, default='Unknown address')
     detail_address = models.CharField(max_length=255, blank=True)  # 상세 주소 필드 추가
     postcode = models.CharField(max_length=10, blank=True)  # 우편번호 필드 추가
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)  # 프로필 사진 필드 추가
 
     # groups 필드 수정
     groups = models.ManyToManyField(
@@ -33,6 +33,7 @@ class CustomUser(AbstractUser):
         return self.username  # 사용자 이름을 문자열로 반환
 
 
+
 # 게시판 모델 (글 작성, 수정, 삭제, 조회 기능)
 class Post(models.Model):
     TOPIC_CHOICES = [
@@ -54,6 +55,10 @@ class Post(models.Model):
     def __str__(self):
         return self.title  # 제목을 문자열로 반환
 
+    @property
+    def comment_count(self):
+        return self.comments.count()  # 댓글 수를 반환하는 프로퍼티
+
 
 # 댓글 모델 (게시글에 대한 댓글 기능)
 class Comment(models.Model):
@@ -65,6 +70,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.author} on {self.post}'  # 댓글 작성자와 게시글을 문자열로 반환
+
 
 # 좋아요 모델
 class Like(models.Model):
