@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전기 사용량 조회</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+    <link rel="stylesheet" href="{% static 'css/energy_usage.css' %}">
+</head>
+<body>
+    <div class="mobile-screen"> <!-- 모바일 화면 감싸기 -->
+        <a href="{% url '홈' %}">
+            <img src="https://cdn-icons-png.flaticon.com/512/122/122633.png" alt="뒤로 가기" class="back-icon"> <!-- 뒤로 가기 아이콘 -->
+        </a>
+        <header>
+            <h1>전기 사용량 조회</h1>
+        </header>
+        <main>
+            <section>
+                <h2>현재 전기 사용량</h2>
+                <p>실시간으로 전기 사용량을 조회할 수 있습니다.</p>
+
+                <div class="centered"> <!-- 중앙 정렬을 위한 div 추가 -->
+                    <label for="search">시간 검색 :</label>
+                    <input type="text" id="search" placeholder="예: 09:00">
+                    <button type="button">조회</button>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>시간</th>
+                            <th>사용량 (kWh)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>09:00</td>
+                            <td>1.5</td>
+                        </tr>
+                        <tr>
+                            <td>10:00</td>
+                            <td>2.0</td>
+                        </tr>
+                        <tr>
+                            <td>11:00</td>
+                            <td>1.8</td>
+                        </tr>
+                        <tr>
+                            <td>12:00</td>
+                            <td>2.2</td>
+                        </tr>
+                        <tr>
+                            <td>13:00</td>
+                            <td>2.5</td>
+                        </tr>
+                        <tr>
+                            <td>14:00</td>
+                            <td>1.9</td>
+                        </tr>
+                        <!-- 추가 전기 사용량 데이터 -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 아파트 주민 커뮤니티. 모든 권리 보유.</p>
+        </footer>
+    </div> <!-- 모바일 화면 감싸기 종료 -->
+</body>
+</html>

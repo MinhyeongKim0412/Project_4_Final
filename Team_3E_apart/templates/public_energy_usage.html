@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공용 전기 사용량 조회</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+    <link rel="stylesheet" href="{% static 'css/public_energy_usage.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js 라이브러리 추가 -->
+</head>
+<body>
+    <div class="mobile-screen">
+        <a href="{% url '홈' %}">
+            <img src="https://cdn-icons-png.flaticon.com/512/122/122633.png" alt="뒤로 가기" class="back-icon"> <!-- 뒤로 가기 아이콘 -->
+        </a>
+        <header>
+            <h1>공용 전기 사용량 조회</h1>
+        </header>
+        <main>
+            <section>
+                <h2>실시간 전기 사용량</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>항목</th>
+                            <th>사용량 (kWh)</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>엘리베이터</td>
+                            <td>150</td>
+                            <td>정상</td>
+                        </tr>
+                        <tr>
+                            <td>복도 조명</td>
+                            <td>75</td>
+                            <td>정상</td>
+                        </tr>
+                        <tr>
+                            <td>주차장 조명</td>
+                            <td>120</td>
+                            <td>정상</td>
+                        </tr>
+                        <tr>
+                            <td>커뮤니티 센터</td>
+                            <td>200</td>
+                            <td>정상</td>
+                        </tr>
+                        <!-- 추가 항목 -->
+                    </tbody>
+                </table>
+                <br>
+                <canvas id="usageChart" width="400" height="200"></canvas> <!-- 꺾은선 그래프를 위한 canvas 추가 -->
+            </section>
+        </main>
+        <br>
+        <footer>
+            <p>&copy; 2024 아파트 주민 커뮤니티. 모든 권리 보유.</p>
+        </footer>
+    </div>
+    <script>
+        // 꺾은선 그래프 생성
+        const ctx = document.getElementById('usageChart').getContext('2d');
+        const usageChart = new Chart(ctx, {
+            type: 'line', // 그래프 유형
+            data: {
+                labels: ['월', '화', '수', '목', '금', '토', '일'], // x축 레이블
+                datasets: [{
+                    label: '전기 사용량', // 데이터셋 라벨
+                    data: [150, 75, 120, 200, 175, 80, 140], // 데이터 값
+                    borderColor: 'rgba(255, 165, 0, 1)', // 연주황
+                    backgroundColor: 'rgba(255, 165, 0, 0.2)', // 연주황 배경
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(255, 140, 0, 1)', // 주황색 포인트
+                    pointBorderColor: 'rgba(255, 140, 0, 1)',
+                }, {
+                    label: '전기 사용량 (주황)', // 다른 데이터셋
+                    data: [130, 100, 150, 180, 160, 90, 130],
+                    borderColor: 'rgba(255, 69, 0, 1)', // 진한 주황
+                    backgroundColor: 'rgba(255, 69, 0, 0.2)', // 진한 주황 배경
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(255, 50, 0, 1)', // 포인트 색상
+                    pointBorderColor: 'rgba(255, 50, 0, 1)',
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

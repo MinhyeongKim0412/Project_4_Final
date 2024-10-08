@@ -337,3 +337,27 @@ def delete_profile_picture(request):
         return redirect('마이페이지')  # 적절한 리다이렉트 URL로 변경
 
     return redirect('마이페이지')  # GET 요청의 경우 리다이렉트
+
+# 전력요금계산기
+def energy_calculator(request):
+    return render(request, 'energy_calculator.html')
+
+# 실시간 에너지 소비량
+def energy_usage(request):
+    return render(request, 'energy_usage.html')
+
+# 에너지 절약 랭킹
+def energy_ranking(request):
+    return render(request, 'energy_ranking.html')
+
+# 공용전기사용량 조회
+def public_energy_usage(request):
+    return render(request, 'public_energy_usage.html')
+
+# 진행중인 캠페인
+def campaign(request):
+    return render(request, 'campaign.html')
+
+# 편의시설 예약
+def facility_reservation(request):
+    return render(request, 'facility_reservation.html')

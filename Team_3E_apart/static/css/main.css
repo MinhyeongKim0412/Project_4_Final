@@ -177,6 +177,7 @@ main {
 /* 아이콘 아이템 스타일 */
 .icon-item {
     text-align: center; /* 아이콘과 텍스트를 가운데 정렬 */
+    text-decoration: none; /* 밑줄 없애기 */
 }
 
 .icon-item p {
@@ -184,8 +185,11 @@ main {
     font-size: 15px; /* 텍스트 크기 조정 */
     font-weight: bold; /* 글자 굵게 */
     color: #ee8300; /* 진한 주황색 (색상 코드) */
+    text-decoration: none; /* 밑줄 없애기 */
 }
-
+.icon-item a {
+    text-decoration: none; /* 밑줄 없애기 */
+}
 /* 컨텐츠 상자들 */
 .container .gallery {
     display: flex; /* 플렉스 박스 사용 */
