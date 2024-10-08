@@ -207,7 +207,7 @@ def my_comments_view(request):
 @login_required  # 로그인한 사용자만 접근 가능
 def my_liked_posts_view(request):
     # 현재 사용자가 좋아요 누른 게시물 가져오기
-    liked_posts = Post.objects.filter(like__user=request.user)  # 현재 사용자가 좋아요 누른 게시물
+    liked_posts = Post.objects.filter(likes_list__user=request.user)  # 현재 사용자가 좋아요 누른 게시물
     return render(request, 'mypage_liked_posts.html', {'liked_posts': liked_posts})  # 좋아요 누른 게시물 템플릿 렌더링
 
 # 게시물에 좋아요 추가
@@ -215,15 +215,18 @@ def my_liked_posts_view(request):
 @login_required
 def like_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    # 좋아요 모델 인스턴스 생성
-    like, created = Like.objects.get_or_create(user=request.user, post=post)
-    if not created:
-        # 이미 좋아요를 눌렀다면 아무 것도 하지 않음
-        return JsonResponse({'status': 'already_liked'}, status=200)
+    
+    # 사용자가 이미 이 게시물에 대해 좋아요를 눌렀는지 확인
+    if Like.objects.filter(user=request.user, post=post).exists():
+        return JsonResponse({'status': 'already_liked'}, status=400)
+
+    # 새로운 좋아요 추가
+    Like.objects.create(user=request.user, post=post)
     
     # 좋아요 수 증가
     post.likes += 1
     post.save()
+    
     return JsonResponse({'status': 'liked', 'likes': post.likes})
 
 # 게시물에서 좋아요 취소
@@ -231,31 +234,38 @@ def like_post(request, post_id):
 @login_required
 def unlike_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    try:
-        # 좋아요 모델 인스턴스 삭제
-        like = Like.objects.get(user=request.user, post=post)
-        like.delete()
+    
+    # 사용자가 이 게시물에 대해 좋아요를 눌렀는지 확인
+    like = Like.objects.filter(user=request.user, post=post).first()
+    
+    if like:
+        like.delete()  # 좋아요 삭제
+        
         # 좋아요 수 감소
         post.likes -= 1
         post.save()
+        
         return JsonResponse({'status': 'unliked', 'likes': post.likes})
-    except Like.DoesNotExist:
-        return JsonResponse({'status': 'not_liked'}, status=404)
+    
+    return JsonResponse({'status': 'not_liked'}, status=404)
 
 # 게시물에 싫어요 추가
 @require_POST
 @login_required
 def dislike_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    # 싫어요 모델 인스턴스 생성
-    dislike, created = Dislike.objects.get_or_create(user=request.user, post=post)
-    if not created:
-        # 이미 싫어요를 눌렀다면 아무 것도 하지 않음
-        return JsonResponse({'status': 'already_disliked'}, status=200)
+    
+    # 사용자가 이미 이 게시물에 대해 싫어요를 눌렀는지 확인
+    if Dislike.objects.filter(user=request.user, post=post).exists():
+        return JsonResponse({'status': 'already_disliked'}, status=400)
 
+    # 새로운 싫어요 추가
+    Dislike.objects.create(user=request.user, post=post)
+    
     # 싫어요 수 증가
     post.dislikes += 1
     post.save()
+    
     return JsonResponse({'status': 'disliked', 'dislikes': post.dislikes})
 
 # 게시물에서 싫어요 취소
@@ -263,13 +273,17 @@ def dislike_post(request, post_id):
 @login_required
 def undislike_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    try:
-        # 싫어요 모델 인스턴스 삭제
-        dislike = Dislike.objects.get(user=request.user, post=post)
-        dislike.delete()
+    
+    # 사용자가 이 게시물에 대해 싫어요를 눌렀는지 확인
+    dislike = Dislike.objects.filter(user=request.user, post=post).first()
+    
+    if dislike:
+        dislike.delete()  # 싫어요 삭제
+        
         # 싫어요 수 감소
         post.dislikes -= 1
         post.save()
+        
         return JsonResponse({'status': 'undisliked', 'dislikes': post.dislikes})
-    except Dislike.DoesNotExist:
-        return JsonResponse({'status': 'not_disliked'}, status=404)
+    
+    return JsonResponse({'status': 'not_disliked'}, status=404)
