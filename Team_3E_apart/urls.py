@@ -20,4 +20,8 @@ urlpatterns = [
     path('mypage_posts/', views.my_posts_view, name='내게시물'),  # 내 게시물
     path('mypage_comments/', views.my_comments_view, name='내댓글'),  # 내 댓글
     path('mypage_liked_posts/', views.my_liked_posts_view, name='내좋아요누른게시물'),  # 내 좋아요 누른 게시물
+    path('like/<int:post_id>/', views.like_post, name='좋아요'),  # 좋아요 추가
+    path('unlike/<int:post_id>/', views.unlike_post, name='좋아요취소'),  # 좋아요 취소
+    path('dislike/<int:post_id>/', views.dislike_post, name='싫어요'),  # 싫어요 추가
+    path('undislike/<int:post_id>/', views.undislike_post, name='싫어요취소'),  # 싫어요 취소
 ]

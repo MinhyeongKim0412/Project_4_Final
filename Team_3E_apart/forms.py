@@ -16,12 +16,21 @@ class CustomUserCreationForm(UserCreationForm):
                   'apartment_number', 'address', 'detail_address', 'postcode')  # 필요한 필드 포함
 
 class PostForm(forms.ModelForm):
+    TOPIC_CHOICES = [
+        ('사는 얘기', '사는 얘기'),
+        ('자랑하기', '자랑하기'),
+        ('친목', '친목'),
+        ('알립니다', '알립니다'),
+    ]
+
+    topic = forms.ChoiceField(choices=TOPIC_CHOICES, required=True)  # 토픽 필드
     title = forms.CharField(max_length=100, required=True)  # 제목 필드
     content = forms.CharField(widget=forms.Textarea, required=True)  # 내용 필드
 
     class Meta:
         model = Post
-        fields = ('title', 'content')  # 제목과 내용을 포함
+        fields = ('topic', 'title', 'content')  # 토픽, 제목, 내용 포함
+
 
 class CommentForm(forms.ModelForm):
     class Meta:

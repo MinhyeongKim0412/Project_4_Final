@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required  # 로그인 필요 데코레이터 추가
 from .forms import CustomUserCreationForm, PostForm, CommentForm  # 커스텀 사용자 생성 폼 및 게시글 작성을 위한 폼 import
-from .models import CustomUser, Post, Comment  # Post 모델 import
+from .models import CustomUser, Post, Comment, Like, Dislike  # Post 모델 import
 
 def main(request):
     return render(request, 'main.html', {'user': request.user})
@@ -38,8 +40,23 @@ def signup_view(request):
     
     return render(request, 'signup.html', {'form': form})  # 폼 전달
 
+# 마이페이지
 def mypage_view(request):
-    return render(request, 'mypage.html', {'user': request.user}) if request.user.is_authenticated else redirect('로그인')
+    if request.user.is_authenticated:
+        user = request.user  # 현재 로그인한 사용자
+        post_count = Post.objects.filter(author=user).count()  # 사용자가 작성한 게시물 수
+        comment_count = Comment.objects.filter(author=user).count()  # 사용자가 작성한 댓글 수
+
+        context = {
+            'user': user,
+            'post_count': post_count,
+            'comment_count': comment_count,
+            # 필요한 다른 컨텍스트 데이터 추가
+        }
+        return render(request, 'mypage.html', context)  # 템플릿 이름은 상황에 맞게 수정하세요.
+    else:
+        return redirect('로그인')  # 로그인 페이지로 리다이렉트
+
 
 def custom_logout_view(request):
     logout(request)  # 사용자를 로그아웃합니다.
@@ -163,18 +180,96 @@ def update_profile_view(request):
 def my_posts_view(request):
     # 현재 사용자의 게시물 가져오기
     posts = Post.objects.filter(author=request.user)  # 현재 사용자에 의해 작성된 게시물
-    return render(request, 'mypage_posts.html', {'posts': posts})  # 게시물 템플릿 렌더링
+    post_count = posts.count()  # 게시물 수
+    # 현재 사용자가 작성한 댓글 수 가져오기
+    comment_count = Comment.objects.filter(author=request.user).count()  # 현재 사용자에 의해 작성된 댓글 수
+    return render(request, 'mypage_posts.html', {
+        'posts': posts,
+        'post_count': post_count,
+        'comment_count': comment_count  # 댓글 수 전달
+    })  # 게시물 템플릿 렌더링
 
 # 내 댓글 뷰
 @login_required  # 로그인한 사용자만 접근 가능
 def my_comments_view(request):
     # 현재 사용자가 작성한 댓글 가져오기
     comments = Comment.objects.filter(author=request.user)  # 현재 사용자에 의해 작성된 댓글
-    return render(request, 'mypage_comments.html', {'comments': comments})  # 댓글 템플릿 렌더링
+    comment_count = comments.count()  # 댓글 수
+    # 현재 사용자가 작성한 게시물 수 가져오기
+    post_count = Post.objects.filter(author=request.user).count()  # 현재 사용자에 의해 작성된 게시물 수
+    return render(request, 'mypage_comments.html', {
+        'comments': comments,
+        'comment_count': comment_count,  # 댓글 수 전달
+        'post_count': post_count  # 게시물 수 전달
+    })  # 댓글 템플릿 렌더링
 
 # 내 좋아요 누른 게시물 뷰
 @login_required  # 로그인한 사용자만 접근 가능
 def my_liked_posts_view(request):
     # 현재 사용자가 좋아요 누른 게시물 가져오기
-    liked_posts = Post.objects.filter(likes=request.user)  # 현재 사용자가 좋아요 누른 게시물
-    return render(request, 'mypage_liked_posts.html')  # 좋아요 누른 게시물 템플릿 렌더링
+    liked_posts = Post.objects.filter(like__user=request.user)  # 현재 사용자가 좋아요 누른 게시물
+    return render(request, 'mypage_liked_posts.html', {'liked_posts': liked_posts})  # 좋아요 누른 게시물 템플릿 렌더링
+
+# 게시물에 좋아요 추가
+@require_POST
+@login_required
+def like_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    # 좋아요 모델 인스턴스 생성
+    like, created = Like.objects.get_or_create(user=request.user, post=post)
+    if not created:
+        # 이미 좋아요를 눌렀다면 아무 것도 하지 않음
+        return JsonResponse({'status': 'already_liked'}, status=200)
+    
+    # 좋아요 수 증가
+    post.likes += 1
+    post.save()
+    return JsonResponse({'status': 'liked', 'likes': post.likes})
+
+# 게시물에서 좋아요 취소
+@require_http_methods(["DELETE"])
+@login_required
+def unlike_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    try:
+        # 좋아요 모델 인스턴스 삭제
+        like = Like.objects.get(user=request.user, post=post)
+        like.delete()
+        # 좋아요 수 감소
+        post.likes -= 1
+        post.save()
+        return JsonResponse({'status': 'unliked', 'likes': post.likes})
+    except Like.DoesNotExist:
+        return JsonResponse({'status': 'not_liked'}, status=404)
+
+# 게시물에 싫어요 추가
+@require_POST
+@login_required
+def dislike_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    # 싫어요 모델 인스턴스 생성
+    dislike, created = Dislike.objects.get_or_create(user=request.user, post=post)
+    if not created:
+        # 이미 싫어요를 눌렀다면 아무 것도 하지 않음
+        return JsonResponse({'status': 'already_disliked'}, status=200)
+
+    # 싫어요 수 증가
+    post.dislikes += 1
+    post.save()
+    return JsonResponse({'status': 'disliked', 'dislikes': post.dislikes})
+
+# 게시물에서 싫어요 취소
+@require_http_methods(["DELETE"])
+@login_required
+def undislike_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    try:
+        # 싫어요 모델 인스턴스 삭제
+        dislike = Dislike.objects.get(user=request.user, post=post)
+        dislike.delete()
+        # 싫어요 수 감소
+        post.dislikes -= 1
+        post.save()
+        return JsonResponse({'status': 'undisliked', 'dislikes': post.dislikes})
+    except Dislike.DoesNotExist:
+        return JsonResponse({'status': 'not_disliked'}, status=404)

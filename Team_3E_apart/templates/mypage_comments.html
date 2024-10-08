@@ -22,7 +22,7 @@
         <div class="stats">
             <div class="stat">
                 <a href="{% url '내게시물' %}" class="stat-title">게시물</a>
-                <a href="{% url '내게시물' %}" class="stat-number">1</a>
+                <a href="{% url '내게시물' %}" class="stat-number">{{ post_count }}</a>
             </div>
             <div class="stat">
                 <a href="{% url '내댓글' %}" class="stat-title">댓글</a>
@@ -30,7 +30,7 @@
             </div>
             <div class="stat">
                 <a href="{% url '내좋아요누른게시물' %}" class="stat-title">좋아요</a>
-                <a href="{% url '내좋아요누른게시물' %}" class="stat-number">15</a>
+                <a href="{% url '내좋아요누른게시물' %}" class="stat-number">*임시*</a>
             </div>
         </div>
 

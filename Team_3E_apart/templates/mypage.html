@@ -28,17 +28,17 @@
         <div class="stats">
             <div class="stat">
                 <span class="stat-title">나의 작성 게시물 수</span>
-                <a href="{% url '내게시물' %}" class="stat-number" onclick="changeColor(this)">10</a>
+                <a href="{% url '내게시물' %}" class="stat-number" onclick="changeColor(this)">{{ post_count }}</a>
             </div>
             <div class="stat">
                 <span class="stat-title">댓글 수</span>
-                <a href="{% url '내댓글' %}" class="stat-number" onclick="changeColor(this)">5</a>
+                <a href="{% url '내댓글' %}" class="stat-number" onclick="changeColor(this)">{{ comment_count }}</a>
             </div>
             <div class="stat">
                 <span class="stat-title">좋아요한 게시물</span>
-                <a href="{% url '내좋아요누른게시물' %}" class="stat-number" onclick="changeColor(this)">8</a>
+                <a href="{% url '내좋아요누른게시물' %}" class="stat-number" onclick="changeColor(this)">*임시*</a>
             </div>
-        </div>
+        </div>        
         
 
 

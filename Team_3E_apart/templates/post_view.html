@@ -100,43 +100,85 @@
         function likePost(postId) {
             const likeCountElement = document.getElementById('like-count');
             const dislikeCountElement = document.getElementById('dislike-count');
-        
+    
             if (liked) {
                 // 좋아요 취소
                 liked = false;
                 likeCountElement.textContent = parseInt(likeCountElement.textContent) - 1;
+                // 서버에 좋아요 취소 요청 보내기
+                fetch(`/like/${postId}/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                });
             } else {
                 // 싫어요가 눌려있을 경우
                 if (disliked) {
                     disliked = false;
                     dislikeCountElement.textContent = parseInt(dislikeCountElement.textContent) - 1;
+                    // 서버에 싫어요 취소 요청 보내기
+                    fetch(`/dislike/${postId}/`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                        },
+                    });
                 }
                 // 좋아요 추가
                 liked = true;
                 likeCountElement.textContent = parseInt(likeCountElement.textContent) + 1;
+                // 서버에 좋아요 추가 요청 보내기
+                fetch(`/like/${postId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                });
             }
         }
         
         function dislikePost(postId) {
             const likeCountElement = document.getElementById('like-count');
             const dislikeCountElement = document.getElementById('dislike-count');
-        
+    
             if (disliked) {
                 // 싫어요 취소
                 disliked = false;
                 dislikeCountElement.textContent = parseInt(dislikeCountElement.textContent) - 1;
+                // 서버에 싫어요 취소 요청 보내기
+                fetch(`/dislike/${postId}/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                });
             } else {
                 // 좋아요가 눌려있을 경우
                 if (liked) {
                     liked = false;
                     likeCountElement.textContent = parseInt(likeCountElement.textContent) - 1;
+                    // 서버에 좋아요 취소 요청 보내기
+                    fetch(`/like/${postId}/`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                        },
+                    });
                 }
                 // 싫어요 추가
                 disliked = true;
                 dislikeCountElement.textContent = parseInt(dislikeCountElement.textContent) + 1;
+                // 서버에 싫어요 추가 요청 보내기
+                fetch(`/dislike/${postId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                });
             }
         }
-        
     </script>
+    
 </body>
 </html>
