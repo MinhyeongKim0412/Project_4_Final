@@ -132,21 +132,24 @@ main {
 
 /* 외부 컨테이너 스타일 */
 .outer {
-    width: 200%;
-    height: 200px;
+    position: relative; /* 포지션을 상대적으로 설정 */
+    width: 100%; /* 부모 요소에 맞게 조정 */
+    max-width: 800px; /* 최대 폭 설정 (원하는 대로 조정) */
+    height: 400px; /* 높이 조정 (원하는 대로 조정) */
     margin: 0 auto;
-    overflow-x: hidden;
+    overflow: hidden; /* 넘치는 내용 숨기기 */
 }
 
 /* 내부 리스트 스타일 */
 .inner-list {
     display: flex;
-    transition: .3s ease-out;
+    transition: transform 0.5s ease; /* 부드러운 이동 효과 */
     height: 100%;
 }
 
 .inner {
-    padding: 0;
+    min-width: 100%; /* 각 슬라이드의 최소 폭을 100%로 설정 */
+    height: 100%;
 }
 
 .inner img {
@@ -154,6 +157,28 @@ main {
     height: 100%;
     object-fit: cover;
 }
+
+/* 버튼 스타일 */
+.nav-button.left, .nav-button.right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1000; /* 버튼이 이미지 위에 위치하도록 설정 */
+}
+
+.nav-button.left {
+    left: 10px; /* 왼쪽 버튼 위치 */
+}
+
+.nav-button.right {
+    right: 10px; /* 오른쪽 버튼 위치 */
+}
+
+
 
 /* 버튼 리스트 스타일 */
 .button-list {
@@ -172,22 +197,6 @@ main {
     display: flex;
     justify-content: center;
     margin: 10px 0;
-}
-
-/* 네비게이션 버튼 스타일 */
-.nav-button {
-    background-color: #FFA500;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 18px;
-    margin: 0 10px;
-}
-
-.nav-button:hover {
-    background-color: #FF8C00; /* 마우스 오버 시 색상 변화 */
 }
 
 /* 아이콘 그리드 스타일 */

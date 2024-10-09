@@ -62,7 +62,7 @@ body {
 }
 
 .search-input {
-    width: 400px;                  /* 원하는 너비로 조정 */
+    width: 370px;                  /* 원하는 너비로 조정 */
     height: 40px;                  /* 입력창 높이 설정 */
     padding: 0 10px;               /* 패딩 조정 (상하 0, 좌우 10px) */
     border: 1px solid #ddd;        /* 테두리 색상 */

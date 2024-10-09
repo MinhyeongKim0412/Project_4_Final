@@ -18,8 +18,10 @@
                 <h2>아파트 주민 게시판</h2>
             </div>
             <div class="right-header">
-                <input type="text" placeholder="검색" class="search-input"> <!-- 검색 입력창 -->
-                <button class="search-button">🔍</button> <!-- 검색 버튼 이모지 -->
+                <form method="GET" action="{% url '검색' %}">
+                    <input type="text" name="query" class="search-input" placeholder="검색어를 입력하세요" required>
+                    <button type="submit" class="search-button">🔍</button>
+                </form>
                 <img src="https://cdn-icons-png.flaticon.com/512/9679/9679166.png" alt="메뉴" class="menu-icon"> <!-- 메뉴 아이콘 -->
             </div>
                      

@@ -91,7 +91,7 @@ STATICFILES_DIRS = [
 
 # 미디어 파일 설정
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'Team_3E_apart/media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'Team_3E_apart/media')
 
 # 템플릿 설정
 TEMPLATES = [
