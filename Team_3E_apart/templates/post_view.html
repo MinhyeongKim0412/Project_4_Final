@@ -16,7 +16,7 @@
         <h2>게시물 조회하기</h2> <!-- 1행: 게시판/토픽 -->
         
         <div class="author-info"> <!-- 2행: 작성자 정보 -->
-            <img src="{{ post.author.profile_image.url }}" alt="{{ post.author.username }}의 프로필 사진" class="profile-pic">
+            <img src="{{ post.author.profile_picture.url }}" alt="{{ post.author.username }}의 프로필 사진" class="profile-pic">
             <div class="author-details"> <!-- 작성자 세부사항 -->
                 <p><strong>{{ post.author.username }}</strong> / <span class="time-ago" data-timestamp="{{ post.created_at|date:'c' }}"></span></p> <!-- 1행: 작성자 이름과 시간 -->
                 <p>조회수: {{ post.views }}</p> <!-- 2행: 조회수 -->

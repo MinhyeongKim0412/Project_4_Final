@@ -35,4 +35,5 @@ urlpatterns = [
     path('public-usage/', views.public_energy_usage, name='전기사용량'),  # 공용전기사용량 조회
     path('campaign/', views.campaign, name='캠페인'),  # 진행중인 캠페인
     path('facility/', views.facility_reservation, name='편의시설예약'),  # 편의시설 예약
+    path('search/', views.search, name='검색'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

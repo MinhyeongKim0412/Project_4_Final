@@ -42,20 +42,45 @@ header {
     margin: 0 auto;
     margin-left: 240px;
 }
+/* 검색 기능 폼 숨기기 */
+form {
+    display: inline-block;
+    position: relative;
+}
 
-/* 검색 버튼 스타일 */
+form input[type="text"] {
+    width: 60px; /* 기본적으로 검색창을 작게 설정 */
+    opacity: 0; /* 처음에 검색창은 숨김 */
+    transition: width 0.5s ease, opacity 0.5s ease; /* 애니메이션 추가 */
+    font-size: 12px; /* 플레이스홀더 글자 크기 축소 */
+    padding: 5px; /* 여백 추가 */
+}
+
+/* 돋보기 버튼 클릭 시 검색창이 열리도록 */
+form:focus-within input[type="text"],
+form:hover input[type="text"] {
+    width: 100px; /* 검색창 너비 확대 */
+    opacity: 1; /* 검색창 표시 */
+    transition: width 0.5s ease, opacity 0.5s ease;
+}
+
+/* 돋보기 버튼 스타일 */
 .search-button {
     background: transparent;
     border: none;
-    color: #000;
     font-size: 24px;
     cursor: pointer;
-    transition: color 0.3s ease;
 }
 
-.search-button:hover {
-    color: #007BFF; /* 마우스 오버 시 색상 변화 */
+/* 플레이스홀더 폰트 크기 축소 */
+input[type="text"]::placeholder {
+    font-size: 12px;
+    color: #888; /* 플레이스홀더 색상 */
+    text-overflow: ellipsis; /* 텍스트가 넘칠 때 말줄임표로 처리 */
+    white-space: nowrap; /* 한 줄로 유지 */
+    overflow: hidden; /* 넘치는 텍스트 숨기기 */
 }
+
 
 /* 상단 상태바 */
 .status-bar {

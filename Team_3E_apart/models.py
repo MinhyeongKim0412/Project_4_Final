@@ -32,8 +32,6 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username  # 사용자 이름을 문자열로 반환
 
-
-
 # 게시판 모델 (글 작성, 수정, 삭제, 조회 기능)
 class Post(models.Model):
     TOPIC_CHOICES = [
@@ -51,6 +49,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)  # 수정일
     likes = models.IntegerField(default=0)  # 좋아요 수
     dislikes = models.IntegerField(default=0)  # 싫어요 수
+    views = models.IntegerField(default=0)  # 조회수 필드 추가
 
     def __str__(self):
         return self.title  # 제목을 문자열로 반환
@@ -58,6 +57,7 @@ class Post(models.Model):
     @property
     def comment_count(self):
         return self.comments.count()  # 댓글 수를 반환하는 프로퍼티
+
 
 
 # 댓글 모델 (게시글에 대한 댓글 기능)

@@ -6,6 +6,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required  # 로그인 필요 데코레이터 추가
 from .forms import CustomUserCreationForm, PostForm, CommentForm, ProfilePictureForm  # 커스텀 사용자 생성 폼 및 게시글 작성을 위한 폼 import
 from .models import CustomUser, Post, Comment, Like, Dislike  # Post 모델 import
+from . import models
+from django.db.models import Q
+
 
 def main(request):
     return render(request, 'main.html', {'user': request.user})
@@ -361,3 +364,22 @@ def campaign(request):
 # 편의시설 예약
 def facility_reservation(request):
     return render(request, 'facility_reservation.html')
+
+# 검색 결과
+def search(request):
+    query = request.GET.get('query', '')
+    if query:
+        search_results = Post.objects.filter(
+            Q(title__icontains=query) |  # 제목에 검색어가 포함된 글 찾기
+            Q(content__icontains=query)  # 내용에 검색어가 포함된 글 찾기
+        )
+    else:
+        search_results = Post.objects.none()
+    
+    return render(request, 'search_results.html', {'search_results': search_results, 'query': query})
+
+# 게시물 조회수
+def post_detail(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    post.views += 1  # 조회수 증가
+    post.save()  # 변경 사항 저장

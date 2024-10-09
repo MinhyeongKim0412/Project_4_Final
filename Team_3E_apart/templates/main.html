@@ -28,7 +28,11 @@
         </div>
         <header>
             <img src="https://mblogthumb-phinf.pstatic.net/MjAxODA5MjBfMjUz/MDAxNTM3NDExNDI5Njkx.h7tU2hXwycqD8QqQh_kt6S22wumbpTVBtlvxo2TJkIcg.hb_hXEax3pxzNYMAHBIBhlj2v602muJCmtDcFmgKv1wg.PNG.dnduf75/%EB%A1%9C%EA%B3%A0%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%ED%95%9C%EA%B5%AD%EC%A0%84%EB%A0%A5%EA%B3%B5%EC%82%AC%EB%A1%9C%EA%B3%A0-5.png?type=w800" alt="로고" class="logo">
-            <button class="search-button">🔍</button>
+            <form method="GET" action="{% url '검색' %}">
+                <input type="text" name="query" placeholder="검색어를 입력하세요" required>
+                <button type="submit" class="search-button">🔍</button>
+            </form>
+            
         </header>
         <div class="outer">
             <div class="inner-list">
