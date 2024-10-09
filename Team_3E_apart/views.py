@@ -137,6 +137,31 @@ def post_edit_view(request, post_id):
         form = PostForm(instance=post)  # GET 요청 시 기존 게시글 데이터로 폼 생성
     return render(request, 'post_edit.html', {'form': form, 'post': post})  # 수정 폼과 게시글 데이터 전달
 
+@login_required  # 로그인한 사용자만 접근 가능
+def post_delete_view(request, post_id):
+    post = get_object_or_404(Post, id=post_id)  # 게시글 가져오기
+    if request.method == 'POST':
+        post.delete()  # 게시글 삭제
+        messages.success(request, '게시글이 성공적으로 삭제되었습니다.')  # 삭제 성공 메시지
+        return redirect('게시판')  # 게시판으로 리다이렉트
+    return render(request, 'post_delete_confirm.html', {'post': post})  # 삭제 확인 페이지 렌더링
+
+@login_required  # 로그인한 사용자만 접근 가능
+def post_report_view(request, post_id):
+    post = get_object_or_404(Post, id=post_id)  # 게시글 가져오기
+
+    if request.method == 'POST':
+        # 신고된 게시물에 대한 처리를 수행합니다.
+        # 예를 들어, 신고된 게시물의 신고 횟수를 증가시키거나 별도의 필드에 신고 사유를 저장할 수 있습니다.
+        post.report_count += 1  # 신고 횟수 증가 (report_count 필드가 있어야 함)
+        post.save()
+
+        messages.success(request, '게시물이 성공적으로 신고되었습니다.')  # 신고 성공 메시지
+        return redirect('글조회', post_id=post.id)  # 신고 후 게시글 보기로 리다이렉트
+
+    return render(request, 'post_report.html', {'post': post})  # 신고 폼 페이지 렌더링
+
+
 def post_view(request, post_id):
     post = Post.objects.get(id=post_id)
     comments = post.comments.all()  # 해당 게시물의 모든 댓글 가져오기

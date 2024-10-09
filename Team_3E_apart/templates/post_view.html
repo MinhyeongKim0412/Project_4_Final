@@ -28,7 +28,20 @@
 
         <h1>{{ post.title }}</h1> <!-- 3행: 제목 -->
         <p>{{ post.content }}</p> <!-- 4행: 본문 내용 -->
-        
+
+        {% if request.user == post.author %}
+        <div class="edit-delete-buttons">
+            <form action="{% url '글수정' post.id %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">수정</button>
+            </form>
+            <form action="{% url '글삭제' post.id %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">삭제</button>
+            </form>
+        </div>
+        {% endif %}
+
         <div class="reaction-buttons"> <!-- 5행: 좋아요/싫어요 수 -->
             <button id="like-btn" class="reaction-button" onclick="likePost({{ post.id }})">
                 <img src="https://cdn-icons-png.flaticon.com/512/17216/17216613.png" alt="좋아요 아이콘" style="width: 20px; height: 20px;"/> <!-- 좋아요 아이콘 -->
@@ -38,6 +51,11 @@
                 <img src="https://cdn-icons-png.flaticon.com/512/13319/13319496.png" alt="싫어요 아이콘" style="width: 20px; height: 20px;"/> <!-- 싫어요 아이콘 -->
                 <span id="dislike-count">{{ post.dislikes }}</span> <!-- 싫어요 수 -->
             </button>
+            <button class="report-button" onclick="location.href='{% url '글신고' post.id %}'">
+                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="신고하기 아이콘" style="width: 20px; height: 20px;"/> <!-- 신고하기 아이콘 -->
+                신고하기
+            </button>
+            
         </div>
         
         

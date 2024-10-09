@@ -1,0 +1,25 @@
+<!-- post_delete_confirm.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시물 삭제 확인</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/post_delete_confirm.css' %}">
+</head>
+</head>
+<body>
+    <h2>게시물 삭제 확인</h2>
+    <p>정말로 이 게시물을 삭제하시겠습니까?</p>
+    <h3>{{ post.title }}</h3>
+    <p>작성자: {{ post.author }}</p>
+    <p>작성일: {{ post.created_at }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">삭제하기</button>
+    </form>
+    <a href="{% url '글조회' post.id %}">취소</a>
+</body>
+</html>
