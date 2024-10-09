@@ -1,0 +1,216 @@
+/* board.css */
+
+/* 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 웹폰트 불러오기 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+/* 전체 스타일 */
+body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(45deg, rgba(255, 214, 151, 0.8), rgba(255, 255, 204, 0.8), rgba(178, 255, 178, 0.8)); /* 연한 주황, 노랑, 연한 연두색의 사선 그라데이션 */
+    color: #333; /* 기본 글자 색상 */
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+}
+
+/* 모바일 화면 느낌의 둥근 사각형, 세로가 긴 직사각형으로 조정 */
+.mobile-screen {
+    width: 600px; /* 스마트폰 화면처럼 세로로 긴 직사각형 */
+    height: 95vh; /* 화면 높이의 95% 차지 */
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #ddd;
+    padding: 40px; /* 안쪽 여백 추가 (값 조정 가능) */
+}
+
+.header {
+    display: flex;                  /* 플렉스 박스 사용 */
+    flex-direction: column;         /* 세로 방향으로 정렬 */
+    align-items: flex-start;        /* 왼쪽 정렬 */
+}
+
+.left-header {
+    margin-bottom: 10px;            /* h2 태그와 right-header 사이의 간격 */
+}
+
+.right-header {
+    display: flex;                  /* 플렉스 박스 사용 */
+    align-items: center;            /* 세로 중앙 정렬 */
+}
+
+
+.back-icon {
+    width: 30px;                 /* 아이콘 크기 */
+    height: 30px;                /* 아이콘 높이 */
+    margin-right: 10px;          /* 아이콘과 텍스트 간의 간격 */
+    margin-bottom: 15px;          /* 아이콘 아래 마진 추가 (값은 조정 가능) */
+}
+
+.search-input {
+    width: 370px;                  /* 원하는 너비로 조정 */
+    height: 40px;                  /* 입력창 높이 설정 */
+    padding: 0 10px;               /* 패딩 조정 (상하 0, 좌우 10px) */
+    border: 1px solid #ddd;        /* 테두리 색상 */
+    border-radius: 5px;            /* 모서리 둥글게 */
+    transition: width 0.3s;        /* 너비 전환 효과 */
+    font-size: 16px;               /* 텍스트 크기 조정 */
+    line-height: 40px;             /* 높이에 맞게 줄 높이 설정 */
+}
+
+.search-input:focus {
+    outline: none;                 /* 포커스 시 테두리 제거 */
+    border-color: orange;          /* 포커스 시 테두리 색상 변경을 주황색으로 */
+}
+
+.search-button {
+    height: 40px;                  /* 버튼 높이 설정 */
+    background-color: transparent;  /* 배경색 없음 */
+    border: none;                   /* 테두리 없음 */
+    cursor: pointer;                /* 커서 포인터로 변경 */
+    font-size: 20px;                /* 이모지 크기 조정 */
+    margin-left: 10px;             /* 입력창과 버튼 간의 간격 */
+    padding: 0;                    /* 버튼 패딩 없앰 */
+    line-height: 40px;             /* 높이에 맞게 줄 높이 설정 */
+    vertical-align: middle;        /* 세로 정렬을 중간으로 설정 */
+    outline: none;                  /* 포커스 시 외곽선 제거 */
+}
+
+/* 메뉴 아이콘 스타일 */
+.menu-icon {
+    width: 30px; /* 아이콘 크기 조정 */
+    height: auto; /* 비율 유지 */
+    margin-left: 60px; /* 아이콘과 입력 간의 간격 */
+}
+
+/* 글 작성하기 버튼 스타일 */
+.write-button {
+    position: absolute;           /* 위치를 절대적으로 설정 */
+    bottom: 20px;                /* 화면 최하단 */
+    right: 20px;                 /* 화면 우측 */
+    display: inline-flex;        /* 인라인 플렉스 사용 */
+    align-items: center;         /* 세로 중앙 정렬 */
+    padding: 10px 15px;         /* 패딩 추가 */
+    color: white;                /* 글자 색상 (이미지 만 사용할 경우 필요 없음) */
+    border-radius: 5px;         /* 모서리 둥글게 */
+    text-decoration: none;       /* 링크의 밑줄 제거 */
+    transition: background 0.3s; /* 배경 색상 전환 효과 */
+}
+
+/* 이미지 스타일 */
+.write-icon {
+    width: 100px;                 /* 이미지의 너비 조정 */
+    height: auto;                /* 이미지의 높이 조정 */
+    margin-right: 5px;           /* 이미지와 텍스트 간의 간격 (필요에 따라 조정) */
+}
+
+
+/* 게시판 제목 스타일 */
+h2 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+/* 게시물 목록 스타일 */
+ul {
+    list-style-type: none; /* 리스트 스타일 제거 */
+}
+
+ul li {
+    background-color: white; /* 게시물 배경색 */
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    transition: transform 0.2s;
+}
+/* 게시물 제목 스타일 */
+ul li h3 {
+    margin: 0;
+    color: #FFA500; /* 제목 색상 주황색 */
+}
+
+ul li p {
+    margin-top: 5px;
+    color: #666; /* 내용 색상 */
+}
+
+/* 로그아웃 버튼 스타일 */
+.logout-btn {
+    padding: 10px 15px;  /* 버튼의 패딩 */
+    background-color: #dc3545;  /* 버튼 배경색 (빨간색) */
+    color: white;  /* 글자 색상 */
+    border: none;  /* 테두리 없음 */
+    border-radius: 5px;  /* 모서리 둥글게 */
+    cursor: pointer;  /* 커서 포인터로 변경 */
+    transition: background 0.3s;  /* 배경 색상 전환 효과 */
+}
+
+.logout-btn:hover {
+    background-color: #c82333;  /* 마우스 오버 시 색상 */
+}
+/* 게시물 목록 스타일 */
+.post-info {
+    display: flex; /* 수평 정렬을 위해 flexbox 사용 */
+    align-items: center; /* 세로 중앙 정렬 */
+}
+
+.profile-pic {
+    width: 40px; /* 프로필 사진 크기 조정 */
+    height: 40px; /* 프로필 사진 크기 조정 */
+    border-radius: 50%; /* 원형으로 자르기 */
+    margin-right: 10px; /* 프로필 사진과 시간 간의 간격 */
+}
+
+.time-ago {
+    color: #9f9f9f; /* 시간 텍스트 색상 */
+}
+
+/* 게시물 제목 스타일 */
+.post-title a {
+    text-decoration: none; /* 기본 밑줄 제거 */
+    color: inherit; /* 기본 색상 상속 */
+    transition: color 0.3s; /* 색상 전환 효과 */
+    font-size: 1.2em; /* 글자 크기를 키움 (필요에 따라 조정 가능) */
+    margin: 40px 0; /* 상하 마진 추가 (10px 상하, 좌우 0px) */
+}
+
+
+.post-title a:hover {
+    color: rgb(38, 190, 255); /* 호버 시 색상 변경 */
+}
+
+.post-stats {
+    display: flex; /* flexbox로 아이템을 수평 정렬 */
+}
+
+.stat-item {
+    display: flex; /* flexbox로 아이콘과 텍스트를 수평 정렬 */
+    align-items: center; /* 아이콘과 텍스트 세로 정렬 */
+    margin-right: 30px; /* 항목 간의 간격을 설정 */
+}
+
+.stat-icon {
+    width: 0.8em; /* 아이콘의 너비를 글자 크기와 비슷하게 설정 */
+    height: 0.8em; /* 아이콘의 높이를 글자 크기와 비슷하게 설정 */
+    margin-right: 5px; /* 아이콘과 텍스트 간의 간격 설정 */
+}
+
+.stat-item span {
+    font-size: 0.9em; /* 텍스트 크기 조정 (필요에 따라 조정 가능) */
+}
+

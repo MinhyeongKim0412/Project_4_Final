@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">  <!-- CSS 파일 로드 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 카카오 주소찾기 API -->
+</head>
+<body>
+    <div class="mobile-screen">
+        <a href="{% url '홈' %}">
+            <img src="https://cdn-icons-png.flaticon.com/512/122/122633.png" alt="뒤로 가기" class="back-icon"> <!-- 뒤로 가기 아이콘 -->
+        </a>
+        <div class="signup-container">
+            <h2>회원가입</h2>
+            <div class="privacy-agreement">
+                <h3>개인정보 수집 및 이용 동의</h3>
+                <input type="checkbox" id="privacy_agree" required>
+                <label for="privacy_agree">개인정보 수집 및 이용에 동의합니다.</label>
+                <br>
+
+                <h3>이용약관 동의</h3>
+                <input type="checkbox" id="terms_agree" required>
+                <label for="terms_agree">이용약관에 동의합니다.</label>
+            </div>
+
+            <br>
+            <form method="POST">
+                                
+                <label for="member_post">우편번호:</label>
+                <input id="member_post" type="text" placeholder="Zip Code" readonly onclick="findAddr()" />
+                
+                <label for="member_addr">도로명 주소:</label>
+                <input id="member_addr" type="text" placeholder="Address" readonly onclick="findAddr()" /> <br>
+                
+                <label for="detailed_addr">상세 주소:</label>
+                <input id="detailed_addr" type="text" placeholder="Detailed Address" /> <!-- 상세 주소 입력 -->
+                
+                {% csrf_token %}
+                {{ form.as_p }}  <!-- 자동으로 필드 생성 -->
+                <br>
+                <button type="submit">가입하기</button>  <!-- 가입 버튼 -->
+            </form>
+            <a href="{% url '로그인' %}">이미 계정이 있으신가요? 로그인하기</a>
+        </div>
+    </div>
+
+    <script>
+        function findAddr() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // 도로명 주소 및 지번 주소 변수
+                    var roadAddr = data.roadAddress;
+                    var jibunAddr = data.jibunAddress;
+                    
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('member_post').value = data.zonecode; // 우편번호
+                    if (roadAddr !== '') {
+                        document.getElementById("member_addr").value = roadAddr; // 도로명 주소
+                    } else if (jibunAddr !== '') {
+                        document.getElementById("member_addr").value = jibunAddr; // 지번 주소
+                    }
+                }
+            }).open();
+        }
+    </script>
+</body>
+</html>

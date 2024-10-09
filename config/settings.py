@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-q@^)rt#@o290db-w=dv#+8wawrp!^=wfm+0ix8ykxd31lum3xj
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.10.21.80', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -53,9 +53,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'apartment_community',
-        'USER': 'root',
+        'USER': 'remote_user',
         'PASSWORD': '1234',
-        'HOST': 'localhost',
+        'HOST': '10.10.21.80',
         'PORT': '3306',
     }
 }
@@ -91,7 +91,7 @@ STATICFILES_DIRS = [
 
 # 미디어 파일 설정
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'Team_3E_apart/media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'Team_3E_apart/media')
 
 # 템플릿 설정
 TEMPLATES = [
@@ -111,3 +111,9 @@ TEMPLATES = [
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = '/'  # 로그아웃 후 리디렉션할 URL
+
+# 커스텀 사용자 모델 설정 추가
+AUTH_USER_MODEL = 'Team_3E_apart.CustomUser'

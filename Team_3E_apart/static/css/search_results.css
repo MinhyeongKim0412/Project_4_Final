@@ -1,0 +1,97 @@
+/* Pretendard Variable 폰트 가져오기 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+/* 배경 그라데이션 */
+body {
+    background: linear-gradient(45deg, rgba(255, 214, 151, 0.8), rgba(255, 255, 204, 0.8), rgba(178, 255, 178, 0.8));
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+/* 메인 컬러 */
+:root {
+    --main-color: #ff6f20; /* 주황색 */
+    --light-orange: #ffb84d; /* 연주황색 */
+    --gray: #ccc; /* 회색 */
+    --black: #000; /* 검정색 */
+}
+
+/* 탭 스타일 */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 2px solid #9c9c9c; /* 진회색 보더 라인 */
+    border-bottom: none;
+    background: linear-gradient(135deg, #FFEBB5, #FFF3E0, #FFEBB5); /* 파스텔톤 연주황, 연노랑, 연초록으로 그라데이션 */
+    color: var(--black);
+    border-top-left-radius: 8px; /* 위 왼쪽 모서리 둥글게 */
+    border-top-right-radius: 8px; /* 위 오른쪽 모서리 둥글게 */
+    border-bottom-left-radius: 0; /* 아래 왼쪽 모서리 각지게 */
+    border-bottom-right-radius: 0; /* 아래 오른쪽 모서리 각지게 */
+    margin-right: 10px; /* 탭 사이 간격 */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* 변형 효과 추가 */
+    box-shadow: 6px 0 12px rgba(0, 0, 0, 0.2); /* 오른쪽에 그림자 추가 */
+}
+
+/* 마지막 탭의 마진 제거 */
+.tab:last-child {
+    margin-right: 0;
+}
+
+/* 호버 효과 */
+.tab:hover {
+    color: #FFA500; /* 호버 시 글자 색을 주황색으로 변경 */
+    font-weight: bold; /* 글자 볼드 처리 */
+}
+
+
+.active {
+    border-color: var(--gray);
+    font-weight: bold;
+}
+
+/* 검색 결과 스타일 */
+.results {
+    display: none;
+}
+
+.active-results {
+    display: block;
+}
+
+li {
+    list-style-type: circle; /* 불릿 제거 */
+    margin: 10px 0;
+}
+
+a {
+    text-decoration: none; /* 링크 밑줄 제거 */
+    color: var(--black); /* 링크 색상 */
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--main-color); /* 링크 호버 시 주황색 */
+}
+
+/* 모바일 화면 스타일 */
+.mobile-screen {
+    width: 600px;
+    height: 85vh;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--gray);
+    padding: 40px; /* 내부 패딩 추가 */
+}
+

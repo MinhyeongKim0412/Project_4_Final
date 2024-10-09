@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글 수정</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/post_edit.css' %}">
+</head>
+<body>
+    <h2>글 수정</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title" value="{{ post.title }}" required>
+        </div>
+        <div>
+            <label for="content">내용</label>
+            <textarea id="content" name="content" required>{{ post.content }}</textarea>
+        </div>
+        <button type="submit">수정하기</button>
+    </form>
+    <a href="{% url '글조회' post.id %}">취소</a> <!-- 수정 취소 링크 -->
+</body>
+</html>

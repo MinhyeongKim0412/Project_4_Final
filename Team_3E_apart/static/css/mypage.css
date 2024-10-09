@@ -1,0 +1,186 @@
+/* mypage.css */
+
+/* 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 웹폰트 불러오기 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+/* 전체 스타일 */
+body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(45deg, rgba(255, 214, 151, 0.8), rgba(255, 255, 204, 0.8), rgba(178, 255, 178, 0.8)); /* 연한 주황, 노랑, 연한 연두색의 사선 그라데이션 */
+    color: #333; /* 기본 글자 색상 */
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+}
+
+/* 모바일 화면 느낌의 둥근 사각형, 세로가 긴 직사각형으로 조정 */
+.mobile-screen {
+    width: 600px; /* 스마트폰 화면처럼 세로로 긴 직사각형 */
+    height: 95vh; /* 화면 높이의 95% 차지 */
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #ddd;
+    padding: 40px; /* 안쪽 여백 추가 (값 조정 가능) */
+}
+
+/* 점선 구분선 스타일 */
+.horizontal-divider {
+    width: 100%; /* 구분선의 너비 */
+    height: 1px; /* 구분선의 높이 */
+    border-top: 1px dashed #818181; /* 점선 구분선 */
+    margin: 10px 0; /* 구분선 위아래 여백 */
+}
+
+/* 상단 아이콘 스타일 */
+.header {
+    width: 100%; /* 아이콘을 담고 있는 헤더의 전체 폭 */
+    display: flex;
+    justify-content: flex-end; /* 아이콘을 우측으로 정렬 */
+    padding: 10px; /* 여백 추가 */
+}
+
+
+/* 아이콘 스타일 */
+.icon {
+    width: 24px; /* 아이콘 크기 */
+    height: 24px; /* 아이콘 크기 */
+    margin-left: 10px; /* 아이콘 간 간격 */
+    cursor: pointer; /* 커서 포인터 */
+}
+
+/* 프로필 사진 스타일 */
+.profile {
+    margin-top: 20px; /* 위쪽 여백 */
+}
+
+.profile-pic {
+    width: 100px; /* 프로필 사진의 크기 */
+    height: 100px; /* 프로필 사진의 크기 */
+    border-radius: 50%; /* 원형으로 만들기 */
+    border: 3px solid #ff7f50; /* 주황색 테두리 */
+}
+
+/* 사용자 인사말 스타일 */
+h2 {
+    margin: 20px 0; /* 위아래 여백 */
+    color: #ff7f50; /* 주황색으로 변경 */
+    text-align: left; /* 가운데 정렬 */
+}
+
+/* 통계 스타일 */
+.stats {
+    display: flex; /* 가로 방향으로 배치 */
+    justify-content: space-between; /* 각 요소 사이의 간격을 최대로 설정 */
+    width: 100%; /* 전체 너비 사용 */
+    margin: 20px 0; /* 위아래 여백 */
+}
+
+.stat {
+    flex: 1; /* 각 통계의 폭을 동일하게 */
+    display: flex; /* 세로 방향으로 배치 */
+    flex-direction: column; /* 수직으로 쌓이게 설정 */
+    align-items: center; /* 가운데 정렬 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.stat-title {
+    font-size: 16px; /* 통계 제목의 글자 크기 */
+    color: #666; /* 통계 제목 색상 */
+    margin-bottom: 8px; /* 제목과 숫자 간의 간격 */
+}
+
+.stat-number {
+    font-size: 24px; /* 통계 숫자 크기 */
+    color: #333; /* 기본 색상 */
+    cursor: pointer; /* 클릭 가능한 커서 */
+    font-weight: bold; /* 글자 굵게 설정 */
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+
+/* 아이콘 링크 스타일 */
+.icon-links {
+    display: flex; /* 가로 방향으로 배치 */
+    justify-content: center; /* 중앙 정렬 */
+    width: 100%; /* 전체 너비 사용 */
+    margin: 20px 0; /* 위아래 여백 */
+}
+
+.icon-link {
+    text-align: center; /* 가운데 정렬 */
+    display: flex; /* flex 사용 */
+    flex-direction: column; /* 세로 방향으로 배치 */
+    align-items: center; /* 가로 방향 가운데 정렬 */
+    margin: 0 40px; /* 아이콘 간의 간격 조정 */
+    color: #333; /* 글자 색상 설정 (원하는 색상 코드로 변경 가능) */
+
+}
+
+.icon-link img {
+    width: 60px; /* 아이콘 크기 */
+    height: 60px; /* 아이콘 크기 */
+    margin-bottom: 20px; /* 아이콘과 텍스트 사이의 간격 조정 */
+}
+
+
+/* 공지사항 제목 스타일 */
+h3 {
+    margin: 10px 0; /* 위아래 여백 */
+    color: #434343; /* 주황색으로 변경 */
+}
+
+/* 갤러리 보드 스타일 */
+.gallery-board {
+    display: flex; /* 가로 방향으로 배치 */
+    flex-wrap: wrap; /* 줄 바꿈을 허용 */
+    justify-content: space-between; /* 각 갤러리 항목 사이의 간격을 최대로 설정 */
+    width: 100%; /* 전체 너비 사용 */
+    margin: 20px 0; /* 위아래 여백 */
+}
+
+.gallery-item {
+    width: calc(33.33% - 10px); /* 각 갤러리 항목의 너비를 3개로 나눔 (10px은 간격을 위한 여유) */
+    height: 150px; /* 갤러리 항목 높이 */
+    border-radius: 10px; /* 둥글게 만들기 */
+    display: flex; /* 내용을 가운데 정렬하기 위해 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    margin-right: 10px; /* 오른쪽 간격 */
+    flex-direction: column; /* 아이템 내 요소를 세로로 배치 */
+}
+
+.gallery-item:last-child {
+    margin-right: 0; /* 마지막 항목의 오른쪽 간격 제거 */
+}
+
+.gallery-image {
+    width: 100%; /* 이미지 너비를 100%로 설정 */
+    height: 100%; /* 이미지 높이를 100%로 설정하여 갤러리 아이템에 맞춤 */
+    object-fit: cover; /* 비율 유지하면서 크기 조정 */
+    border-radius: 10px; /* 이미지 모서리 둥글게 */
+}
+
+.gallery-text {
+    text-align: center; /* 가운데 정렬 */
+    color: #333; /* 글자 색상 */
+    font-size: 16px; /* 글자 크기 */
+    margin-top: 5px; /* 카드와 글자 간격 (예: 5px) */
+    width: 100%; /* 글자 영역을 전체 너비로 설정 */
+}
+
+

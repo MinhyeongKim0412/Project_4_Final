@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}"> <!-- 프로필 스타일 시트 -->
+</head>
+<body>
+    <div class="profile">
+        <img src="{{ user.profile_picture.url }}" alt="프로필 사진" class="profile-pic"> <!-- 프로필 사진 -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">업로드</button>
+        </form>
+    </div>
+</body>
+</html>

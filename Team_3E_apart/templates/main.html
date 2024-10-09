@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아파트 주민 커뮤니티</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/main.js' %}"></script>
+</head>
+<body>
+    <div class="mobile-screen">
+        <div class="status-bar">
+            <div class="left-icons">
+                <span id="current-time"></span>
+                <span>🔔</span>
+                <span>⏰</span>
+                <span>📅</span>
+                <span>💬</span>
+            </div>
+            <div class="right-icons">
+                <span>🔊</span>
+                <span id="battery-level">75%</span>
+                <span>🔋</span>
+                <span>📶</span>
+            </div>
+        </div>
+        <header>
+            <img src="https://mblogthumb-phinf.pstatic.net/MjAxODA5MjBfMjUz/MDAxNTM3NDExNDI5Njkx.h7tU2hXwycqD8QqQh_kt6S22wumbpTVBtlvxo2TJkIcg.hb_hXEax3pxzNYMAHBIBhlj2v602muJCmtDcFmgKv1wg.PNG.dnduf75/%EB%A1%9C%EA%B3%A0%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%ED%95%9C%EA%B5%AD%EC%A0%84%EB%A0%A5%EA%B3%B5%EC%82%AC%EB%A1%9C%EA%B3%A0-5.png?type=w800" alt="로고" class="logo">
+            <form method="GET" action="{% url '검색' %}">
+                <input type="text" name="query" placeholder="검색어를 입력하세요" required>
+                <button type="submit" class="search-button">🔍</button>
+            </form>
+            
+        </header>
+        <div class="outer">
+            <div class="inner-list">
+                <div class="inner">
+                    <img src="https://img.freepik.com/free-psd/flat-design-gym-template_23-2151681240.jpg" alt="배너 1" class="slide">
+                </div>
+                <div class="inner">
+                    <img src="https://vrthumb.imagetoday.co.kr/2023/01/03/tit126t0381w7.jpg" alt="배너 2" class="slide">
+                </div>
+                <div class="inner">
+                    <img src="https://vrthumb.imagetoday.co.kr/2023/01/03/tit126t0381w5.jpg" alt="배너 3" class="slide">
+                </div>
+            </div>
+            <button class="nav-button left" onclick="moveSlide(-1)">❮</button>
+            <button class="nav-button right" onclick="moveSlide(1)">❯</button>            
+        </div>
+        
+        <div class="icon-grid">
+            <div class="icon-item">
+                <a href="{% url '게시판' %}">
+                    <img src="https://cdn3d.iconscout.com/3d/premium/thumb/app-development-3d-icon-download-in-png-blend-fbx-gltf-file-formats--programming-application-web-software-website-pack-seo-icons-7794487.png?f=webp" alt="Icon 1" />
+                    <p>커뮤니티 게시판</p>
+                </a>
+            </div>
+            <div class="icon-item">
+                <a href="{% url '로그인' %}">
+                    <img src="https://cdn-icons-png.flaticon.com/512/10473/10473619.png" alt="Icon 2" />
+                    <p>로그인</p>
+                </a>
+            </div>
+            <div class="icon-item">
+                <a href="{% url '요금계산기' %}">
+                    <img src="https://cdn-icons-png.flaticon.com/512/10490/10490224.png" alt="Icon 3" />
+                    <p>전력요금계산기</p>
+                </a>
+            </div>
+            <div class="icon-item">
+                <a href="{% url '에너지소비' %}">
+                    <img src="https://cdn-icons-png.flaticon.com/512/10473/10473692.png" alt="Icon 4" />
+                    <p>실시간 에너지 소비량</p>
+                </a>
+            </div>
+            <div class="icon-item">
+                <a href="{% url '랭킹' %}">
+                    <img src="https://cdn-icons-png.flaticon.com/512/10473/10473321.png" alt="Icon 5" />
+                    <p>에너지 절약 랭킹</p>
+                </a>
+            </div>
+            <div class="icon-item">
+                <a href="{% url '전기사용량' %}">
+                    <img src="https://cdn-icons-png.flaticon.com/512/10473/10473656.png" alt="Icon 6" />
+                    <p>공용전기사용량 조회</p>
+                </a>
+            </div>
+            <div class="icon-item">
+                <a href="{% url '캠페인' %}">
+                    <img src="https://cdn-icons-png.flaticon.com/512/10473/10473579.png" alt="Icon 7" />
+                    <p>진행중인 캠페인</p>
+                </a>
+            </div>
+            <div class="icon-item">
+                <a href="{% url '편의시설예약' %}">
+                    <img src="https://cdn-icons-png.flaticon.com/512/10740/10740606.png" alt="Icon 8" />
+                    <p>편의시설 예약</p>
+                </a>
+            </div>
+        </div>
+        <main>
+            <section class="container">
+                <div class="gallery-section">
+                    <h3>공지</h3>
+                    <div class="gallery">
+                        <div class="gallery-item">
+                            <img src="https://www.theteams.kr/includes/uploads/recruit/%EC%9A%B0%EB%82%A8%ED%91%B8%EB%A5%B4%EB%AF%B8%EC%95%84%EC%95%84%ED%8C%8C%ED%8A%B8%EC%9E%85%EC%A3%BC%EC%9E%90%EB%8C%80%ED%91%9C%ED%9A%8C%EC%9D%98_20210405.png" alt="공지 1" class="gallery-image">
+                            <div class="gallery-text">미팅 예정: 사전 신청 필수</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://www.jnewstimes.com/data/photos/20240205/art_17067818398463_18e0dc.jpg" alt="공지 2" class="gallery-image">
+                            <div class="gallery-text">행사 일정: 추후 공지</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://openapt.seoul.go.kr/cmm/fms/getImage.do?atchFileId=FILE_000000001160856&fileSn=0" alt="공지 3" class="gallery-image">
+                            <div class="gallery-text">공지사항 업데이트</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-section">
+                    <h3>편의시설</h3>
+                    <div class="gallery">
+                        <div class="gallery-item">
+                            <img src="https://www.yangsanilbo.com/news/photo/201903/67981_32823_552.jpg" alt="편의시설 1" class="gallery-image">
+                            <div class="gallery-text">이용 가능</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://cdn.imweb.me/upload/S20191014c842471541245/6542a13e4e38f.jpg" alt="편의시설 2" class="gallery-image">
+                            <div class="gallery-text">운영 시간</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://mblogthumb-phinf.pstatic.net/MjAyMzA5MDNfNTIg/MDAxNjkzNzAyNzIyMjYy.uVlbcavyMnKQ7GpGGQKwzUZcOk5lJSXVxsXvCzjm8Msg.iXPOSajV-g04wBDJSqMkd7y-bc-XJd81WsphdQ4CKCsg.JPEG.ryu813578/Screenshot_2023-09-03_at_09.52.33.JPG?type=w800" alt="편의시설 3" class="gallery-image">
+                            <div class="gallery-text">시설 안내</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <div class="bottom-nav-bar">
+            <div class="nav-icon">
+                <a href="{% url '마이페이지' %}">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4254/4254068.png" alt="메뉴">
+                </a>
+            </div>
+            <div class="nav-icon">
+                <a href="{% url '홈' %}">
+                    <img src="https://cdn-icons-png.flaticon.com/512/319/319248.png" alt="홈">
+                </a>
+            </div>            
+            <div class="nav-icon" onclick="history.back();">
+                <img src="https://cdn-icons-png.flaticon.com/512/6423/6423874.png" alt="뒤로가기">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

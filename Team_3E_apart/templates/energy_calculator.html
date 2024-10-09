@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전력요금 계산기</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+    <link rel="stylesheet" href="{% static 'css/energy_calculator.css' %}">
+</head>
+<body>
+    <main class="mobile-screen"> <!-- 모바일 화면 스타일로 감싸기 -->
+        <a href="{% url '홈' %}">
+            <img src="https://cdn-icons-png.flaticon.com/512/122/122633.png" alt="뒤로 가기" class="back-icon"> <!-- 뒤로 가기 아이콘 -->
+        </a>
+        <header>
+            <h1>전력요금 계산기</h1>
+        </header>
+        <section>
+            <h2>전력 요금 계산 방법</h2>
+            <p>전기 요금은 기본 요금과 사용량에 따른 가변 요금으로 구성됩니다. 아래의 요금제를 참조하여 자신의 사용량에 맞는 요금을 계산할 수 있습니다.</p>
+            <ul>
+                <li><strong>기본 요금:</strong> 4,000원 (가정용 전기 사용 시)</li>
+                <li><strong>1단계 (0 ~ 200kWh):</strong> 1,000원/kWh</li>
+                <li><strong>2단계 (201 ~ 400kWh):</strong> 1,500원/kWh</li>
+                <li><strong>3단계 (401kWh 이상):</strong> 2,000원/kWh</li>
+            </ul>
+        </section>
+        <hr>
+        <section>
+            <h2>사용량 입력</h2>
+            <form id="calculator-form">
+                <label for="usage">이번 달 전기 사용량 (kWh):</label>
+                <input type="number" id="usage" name="usage" required>
+                <button type="submit">계산하기</button>
+            </form>
+        </section>
+        
+        <hr>
+        <section>
+            <h2>계산 결과</h2>
+            <p>전기 사용량에 따른 예상 전기 요금을 아래에 계산하여 보여줍니다.</p>
+            <table id="result-table">
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>금액 (원)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>기본 요금</td>
+                        <td id="base-fee">4,000</td>
+                    </tr>
+                    <tr>
+                        <td>1단계 요금 (0 ~ 200kWh)</td>
+                        <td id="step1-fee">사용량에 따라 계산</td>
+                    </tr>
+                    <tr>
+                        <td>2단계 요금 (201 ~ 400kWh)</td>
+                        <td id="step2-fee">사용량에 따라 계산</td>
+                    </tr>
+                    <tr>
+                        <td>3단계 요금 (401kWh 이상)</td>
+                        <td id="step3-fee">사용량에 따라 계산</td>
+                    </tr>
+                    <tr>
+                        <td><strong>총 요금</strong></td>
+                        <td id="total-fee"><strong>계산 후 표시</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <footer>
+            <p>© 2024 아파트 주민 커뮤니티</p>
+        </footer>
+    </main>
+    
+
+
+    <script>
+        document.getElementById('calculator-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const usage = parseInt(document.getElementById('usage').value);
+            const baseFee = 4000;
+            let step1Fee = 0;
+            let step2Fee = 0;
+            let step3Fee = 0;
+
+            if (usage <= 200) {
+                step1Fee = usage * 1000;
+            } else if (usage <= 400) {
+                step1Fee = 200 * 1000;
+                step2Fee = (usage - 200) * 1500;
+            } else {
+                step1Fee = 200 * 1000;
+                step2Fee = 200 * 1500;
+                step3Fee = (usage - 400) * 2000;
+            }
+
+            const totalFee = baseFee + step1Fee + step2Fee + step3Fee;
+
+            document.getElementById('step1-fee').textContent = step1Fee;
+            document.getElementById('step2-fee').textContent = step2Fee;
+            document.getElementById('step3-fee').textContent = step3Fee;
+            document.getElementById('total-fee').textContent = totalFee;
+        });
+    </script>
+</body>
+</html>

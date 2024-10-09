@@ -1,0 +1,22 @@
+<!-- post_report.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시물 신고</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/post_report.css' %}">
+</head>
+<body>
+    <h2>게시물 신고</h2>
+    <p>{{ post.title }}</p>
+    <p>이 게시물을 신고하시겠습니까?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">신고하기</button>
+    </form>
+    <a href="{% url '글조회' post.id %}">취소</a>
+</body>
+</html>

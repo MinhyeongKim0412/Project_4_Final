@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시물 조회</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/post_view.css' %}">
+</head>
+<body>
+    <div class="mobile-screen"> <!-- 모바일 화면 스타일을 적용하기 위해 클래스 수정 -->
+        <a href="{% url '홈' %}">
+            <img src="https://cdn-icons-png.flaticon.com/512/122/122633.png" alt="뒤로 가기" class="back-icon"> <!-- 뒤로 가기 아이콘 -->
+        </a>  
+        <h2>게시물 조회하기</h2> <!-- 1행: 게시판/토픽 -->
+        
+        <div class="author-info"> <!-- 2행: 작성자 정보 -->
+            <img src="{{ post.author.profile_picture.url }}" alt="{{ post.author.username }}의 프로필 사진" class="profile-pic">
+            <div class="author-details"> <!-- 작성자 세부사항 -->
+                <p><strong>{{ post.author.username }}</strong> / <span class="time-ago" data-timestamp="{{ post.created_at|date:'c' }}"></span></p> <!-- 1행: 작성자 이름과 시간 -->
+                <p>조회수: {{ post.views }}</p> <!-- 2행: 조회수 -->
+            </div>
+        </div>
+
+        <div class="horizontal-divider"></div>
+
+
+        <h1>{{ post.title }}</h1> <!-- 3행: 제목 -->
+        <p>{{ post.content }}</p> <!-- 4행: 본문 내용 -->
+
+        {% if request.user == post.author %}
+        <div class="edit-delete-buttons">
+            <form action="{% url '글수정' post.id %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">수정</button>
+            </form>
+            <form action="{% url '글삭제' post.id %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">삭제</button>
+            </form>
+        </div>
+        {% endif %}
+
+        <div class="reaction-buttons"> <!-- 5행: 좋아요/싫어요 수 -->
+            <button id="like-btn" class="reaction-button" onclick="likePost({{ post.id }})">
+                <img src="https://cdn-icons-png.flaticon.com/512/17216/17216613.png" alt="좋아요 아이콘" style="width: 20px; height: 20px;"/> <!-- 좋아요 아이콘 -->
+                <span id="like-count">{{ post.likes }}</span> <!-- 좋아요 수 -->
+            </button>
+            <button id="dislike-btn" class="reaction-button" onclick="dislikePost({{ post.id }})">
+                <img src="https://cdn-icons-png.flaticon.com/512/13319/13319496.png" alt="싫어요 아이콘" style="width: 20px; height: 20px;"/> <!-- 싫어요 아이콘 -->
+                <span id="dislike-count">{{ post.dislikes }}</span> <!-- 싫어요 수 -->
+            </button>
+            <button class="report-button" onclick="location.href='{% url '글신고' post.id %}'">
+                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="신고하기 아이콘" style="width: 20px; height: 20px;"/> <!-- 신고하기 아이콘 -->
+                신고하기
+            </button>
+            
+        </div>
+        
+        
+        <div class="horizontal-divider"></div>
+
+        <p class="comment-count">댓글 {{ comments.count }}개</p> <!-- 6행: 댓글 개수 -->
+
+        <h3>댓글 작성</h3> <!-- 7행: 댓글 작성 영역 -->
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }} <!-- 댓글 양식 렌더링 -->
+            <button type="submit">댓글 등록</button>
+        </form>
+
+        <div class="comments"> <!-- 8행: 기존 댓글 목록 -->
+            {% for comment in comments %}
+            <div class="comment">
+                <p>
+                    <span class="comment-author">{{ comment.author.username }}</span> 
+                    <span class="time-ago" data-timestamp="{{ comment.created_at|date:'c' }}"></span>
+                </p>
+                <p class="comment-content">{{ comment.content }}</p>
+            </div>
+            
+            
+            <script>
+                function timeAgo(date) {
+                    const now = new Date();
+                    const seconds = Math.floor((now - date) / 1000);
+            
+                    let interval = Math.floor(seconds / 31536000);
+                    if (interval >= 1) return interval + "년 전";
+                    interval = Math.floor(seconds / 2592000);
+                    if (interval >= 1) return interval + "개월 전";
+                    interval = Math.floor(seconds / 86400);
+                    if (interval >= 1) return interval + "일 전";
+                    interval = Math.floor(seconds / 3600);
+                    if (interval >= 1) return interval + "시간 전";
+                    interval = Math.floor(seconds / 60);
+                    if (interval >= 1) return interval + "분 전";
+                    return "방금 전";
+                }
+            
+                document.querySelectorAll('.time-ago').forEach(element => {
+                    const timestamp = new Date(element.getAttribute('data-timestamp'));
+                    element.textContent = timeAgo(timestamp);
+                });
+            </script>
+            
+            {% empty %}
+                <p>댓글이 없습니다.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        let liked = false; // 좋아요 상태
+        let disliked = false; // 싫어요 상태
+        
+        function likePost(postId) {
+            const likeCountElement = document.getElementById('like-count');
+            const dislikeCountElement = document.getElementById('dislike-count');
+        
+            if (liked) {
+                // 좋아요 취소
+                liked = false;
+                likeCountElement.textContent = parseInt(likeCountElement.textContent) - 1;
+                // 서버에 좋아요 취소 요청 보내기
+                fetch(`/like/${postId}/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                });
+            } else {
+                // 싫어요가 눌려있을 경우
+                if (disliked) {
+                    disliked = false;
+                    dislikeCountElement.textContent = parseInt(dislikeCountElement.textContent) - 1;
+                    // 서버에 싫어요 취소 요청 보내기
+                    fetch(`/dislike/${postId}/`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                        },
+                    });
+                }
+                // 좋아요 추가
+                liked = true;
+                likeCountElement.textContent = parseInt(likeCountElement.textContent) + 1;
+                // 서버에 좋아요 추가 요청 보내기
+                fetch(`/like/${postId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                });
+            }
+        }
+        
+        function dislikePost(postId) {
+            const likeCountElement = document.getElementById('like-count');
+            const dislikeCountElement = document.getElementById('dislike-count');
+        
+            if (disliked) {
+                // 싫어요 취소
+                disliked = false;
+                dislikeCountElement.textContent = parseInt(dislikeCountElement.textContent) - 1;
+                // 서버에 싫어요 취소 요청 보내기
+                fetch(`/dislike/${postId}/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                });
+            } else {
+                // 좋아요가 눌려있을 경우
+                if (liked) {
+                    liked = false;
+                    likeCountElement.textContent = parseInt(likeCountElement.textContent) - 1;
+                    // 서버에 좋아요 취소 요청 보내기
+                    fetch(`/like/${postId}/`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                        },
+                    });
+                }
+                // 싫어요 추가
+                disliked = true;
+                dislikeCountElement.textContent = parseInt(dislikeCountElement.textContent) + 1;
+                // 서버에 싫어요 추가 요청 보내기
+                fetch(`/dislike/${postId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                });
+            }
+        }
+        
+    </script>
+    
+</body>
+</html>

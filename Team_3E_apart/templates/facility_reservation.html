@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>편의시설 예약</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+    <link rel="stylesheet" href="{% static 'css/facility_reservation.css' %}">
+</head>
+<body>
+    <div class="mobile-screen"> <!-- 모바일 화면 감싸기 시작 -->
+        <a href="{% url '홈' %}">
+            <img src="https://cdn-icons-png.flaticon.com/512/122/122633.png" alt="뒤로 가기" class="back-icon"> <!-- 뒤로 가기 아이콘 -->
+        </a>
+        <header>
+            <h1>편의시설 예약</h1>
+        </header>
+        <main>
+            <section>
+                <h2>편의시설 목록</h2>
+                <div class="facility-list">
+                    <div class="facility-item">
+                        <img src="https://gj.korchamhrd.net/FileDownload_src.jsp?server_file_path=/tisfile/sitebbs/webeditor/03000/2018/20181120235051890.jpg" alt="시설 1">
+                        <h3>체육관</h3>
+                        <p>운동과 체육 활동을 위한 시설입니다.</p>
+                        <label for="gym-reservation">예약하기:</label>
+                        <input type="datetime-local" id="gym-reservation">
+                    </div>
+                    <div class="facility-item">
+                        <img src="https://gj.korchamhrd.net/FileDownload_src.jsp?server_file_path=/tisfile/sitebbs/webeditor/03000/2018/20181120234348103.jpg" alt="시설 2">
+                        <h3>작업실</h3>
+                        <p>각종 창작 활동을 위한 공간입니다.</p>
+                        <label for="workshop-reservation">예약하기:</label>
+                        <input type="datetime-local" id="workshop-reservation">
+                    </div>
+                    <div class="facility-item">
+                        <img src="https://gj.korchamhrd.net/FileDownload_src.jsp?server_file_path=/tisfile/sitebbs/webeditor/03000/2020/20200106155226818.jpg" alt="시설 3">
+                        <h3>회의실</h3>
+                        <p>회의 및 세미나를 위한 공간입니다.</p>
+                        <label for="meeting-room-reservation">예약하기:</label>
+                        <input type="datetime-local" id="meeting-room-reservation">
+                    </div>
+                    <div class="facility-item">
+                        <img src="https://gj.korchamhrd.net/FileDownload_src.jsp?server_file_path=/tisfile/sitebbs/webeditor/03000/2020/20200821172736448.jpg" alt="시설 3">
+                        <h3>독서실</h3>
+                        <p>조용한 환경에서 독서와 공부를 할 수 있는 공간입니다.</p>
+                        <label for="reading-room-reservation">예약하기:</label>
+                        <input type="datetime-local" id="reading-room-reservation">
+                    </div>
+                    
+                    <!-- 추가 시설 항목 -->
+                </div>
+                <div class="button-container">
+                    <button type="button">신청</button>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 아파트 주민 커뮤니티. 모든 권리 보유.</p>
+        </footer>
+    </div> <!-- 모바일 화면 감싸기 끝 -->
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>에너지 절약 캠페인</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+    <link rel="stylesheet" href="{% static 'css/campaign.css' %}">
+</head>
+<body>
+    <div class="mobile-screen"> <!-- 모바일 화면 클래스 추가 -->
+        <a href="{% url '홈' %}">
+            <img src="https://cdn-icons-png.flaticon.com/512/122/122633.png" alt="뒤로 가기" class="back-icon"> <!-- 뒤로 가기 아이콘 -->
+        </a>
+        <header>
+            <h1>현재 진행중인 에너지 절약 캠페인</h1>
+        </header>
+        <br>
+        <main>
+            <section>
+                <h2>아파트 내 에너지 절약 캠페인</h2>
+                <p>우리 아파트에서 진행하는 에너지 절약 캠페인에 참여하세요.<br>다양한 활동과 프로그램이 준비되어 있습니다.</p>
+                <div class="box">
+                    <ul>
+                        <li>전기 절약 프로그램</li>
+                        <li>재활용 교육</li>
+                        <li>친환경 제품 사용 장려</li>
+                    </ul>
+                </div>
+            </section>
+            <br>
+            <section>
+                <h2>정부 부처의 정책</h2>
+                <p>정부에서 시행하는 에너지 절약 관련 정책을 확인하세요.</p>
+                <div class="box">
+                    <ul>
+                        <li>에너지 효율 향상 정책</li>
+                        <li>재생 가능 에너지 지원 정책</li>
+                        <li>국민 참여형 에너지 절약 캠페인</li>
+                    </ul>
+                </div>
+            </section>
+        </main>        
+        <br>
+        <footer>
+            <p>&copy; 2024 아파트 주민 커뮤니티. 모든 권리 보유.</p>
+        </footer>
+    </div> <!-- 모바일 화면 클래스 종료 -->
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색 결과</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/search_results.css' %}"> <!-- 스타일 시트 연결 -->
+    <script src="{% static 'js/search_results.js' %}"></script>
+</head>
+<body>
+    <div class="mobile-screen">
+        <h2>검색 결과: "{{ query }}"</h2>
+
+        <div class="tabs">
+            <div class="tab" onclick="showResults('titles')">글 제목</div>
+            <div class="tab" onclick="showResults('contents')">글 내용</div>
+            <div class="tab" onclick="showResults('comments')">댓글 내용</div>
+        </div>
+
+        <div id="titles" class="results active-results">
+            <ul>
+                {% for result in search_results %}
+                    {% if result.title and query in result.title %}
+                    <li>
+                        <a href="{% url '글조회' result.id %}">{{ result.title }}</a>
+                    </li>
+                    {% endif %}
+                {% empty %}
+                <li>검색 결과가 없습니다 😭</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div id="contents" class="results">
+            <ul>
+                {% for result in search_results %}
+                    {% if result.content and query in result.content %}
+                    <li>
+                        <a href="{% url '글조회' result.id %}">{{ result.content }}</a>
+                    </li>
+                    {% endif %}
+                {% empty %}
+                <li>검색 결과가 없습니다 😭</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div id="comments" class="results">
+            <ul>
+                {% for result in search_results %}
+                    {% for comment in result.comments.all %}
+                        {% if query in comment.content %}
+                        <li>
+                            <a href="{% url '글조회' result.id %}">{{ comment.content }}</a>
+                        </li>
+                        {% endif %}
+                    {% empty %}
+                    <li>검색 결과가 없습니다 😭</li>
+                    {% endfor %}
+                {% empty %}
+                <li>검색 결과가 없습니다 😭</li>
+                {% endfor %}
+            </ul>
+        </div>        
+    </div>
+</body>
+</html>

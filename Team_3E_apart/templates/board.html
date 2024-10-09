@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/board.css' %}">
+</head>
+<body>
+    <div class="mobile-screen"> <!-- 모바일 화면 느낌을 위한 컨테이너 추가 -->
+        <a href="{% url '홈' %}">
+            <img src="https://cdn-icons-png.flaticon.com/512/122/122633.png" alt="뒤로 가기" class="back-icon"> <!-- 뒤로 가기 아이콘 -->
+        </a>        
+        <header class="header">
+            <div class="left-header">
+                <h2>아파트 주민 게시판</h2>
+            </div>
+            <div class="right-header">
+                <form method="GET" action="{% url '검색' %}">
+                    <input type="text" name="query" class="search-input" placeholder="검색어를 입력하세요" required>
+                    <button type="submit" class="search-button">🔍</button>
+                </form>
+                <img src="https://cdn-icons-png.flaticon.com/512/9679/9679166.png" alt="메뉴" class="menu-icon"> <!-- 메뉴 아이콘 -->
+            </div>
+                     
+        </header>
+        
+        <a href="{% url '글작성' %}" class="write-button">
+            <img src="https://cdn-icons-png.flaticon.com/512/559/559463.png" alt="글 작성하기" class="write-icon"> <!-- 글 작성하기 이미지 -->
+        </a>
+        
+        <br>      
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <div class="post-info">
+                        <img src="{{ post.author.profile_picture.url }}" alt="유저 프로필 사진" class="profile-pic"> <!-- 유저 프로필 사진 -->
+                        <span class="time-ago" data-timestamp="{{ post.created_at|date:'c' }}">{{ post.created_at|date:'c' }}</span> <!-- ISO 8601 형식의 날짜 -->
+                    </div>
+                    <div class="post-title">
+                        <a href="{% url '글조회' post.id %}">{{ post.title }}</a> <!-- 게시물 제목을 클릭하면 게시물 상세보기로 이동 -->
+                    </div>
+                    <div class="post-stats">
+                        <span class="stat-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/8875/8875347.png" alt="조회수 아이콘" class="stat-icon"> <!-- 조회수 아이콘 이미지 -->
+                            조회수: {{ post.views|default:0 }} <!-- 조회수가 없을 경우 0으로 처리 -->
+                        </span>
+                        <span class="stat-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/10446/10446787.png" alt="댓글 수 아이콘" class="stat-icon"> <!-- 댓글 수 아이콘 이미지 -->
+                            댓글수: {{ post.comment_count|default:0 }} <!-- 댓글 수가 없을 경우 0으로 처리 -->
+                        </span>
+                        <span class="stat-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/17216/17216613.png" alt="좋아요 아이콘" class="stat-icon"> <!-- 좋아요 아이콘 이미지 -->
+                            좋아요: {{ post.likes|default:0 }} <!-- 좋아요가 없을 경우 0으로 처리 -->
+                        </span>
+                    </div>
+                    
+                </li>
+            {% empty %}
+                <li>게시물이 없습니다.</li> <!-- 게시물이 없을 경우 메시지 -->
+            {% endfor %}
+        </ul>
+        
+        <script>
+        function timeAgo(date) {
+            const now = new Date();
+            const seconds = Math.floor((now - date) / 1000);
+        
+            let interval = Math.floor(seconds / 31536000);
+            if (interval >= 1) return interval + "년 전";
+            interval = Math.floor(seconds / 2592000);
+            if (interval >= 1) return interval + "개월 전";
+            interval = Math.floor(seconds / 86400);
+            if (interval >= 1) return interval + "일 전";
+            interval = Math.floor(seconds / 3600);
+            if (interval >= 1) return interval + "시간 전";
+            interval = Math.floor(seconds / 60);
+            if (interval >= 1) return interval + "분 전";
+            return "방금 전";
+        }
+        
+        document.querySelectorAll('.time-ago').forEach(element => {
+            const timestamp = new Date(element.getAttribute('data-timestamp'));
+            element.textContent = timeAgo(timestamp);
+        });
+        </script>
+        
+        
+    </div>
+</body>
+</html>

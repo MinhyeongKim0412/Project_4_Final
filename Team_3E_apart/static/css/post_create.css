@@ -1,0 +1,137 @@
+/* post_create.css */
+
+/* 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 웹폰트 불러오기 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+/* 전체 스타일 */
+body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(45deg, rgba(255, 214, 151, 0.8), rgba(255, 255, 204, 0.8), rgba(178, 255, 178, 0.8)); /* 연한 주황, 노랑, 연한 연두색의 사선 그라데이션 */
+    color: #333; /* 기본 글자 색상 */
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+}
+
+/* 모바일 화면 느낌의 둥근 사각형, 세로가 긴 직사각형으로 조정 */
+.mobile-screen {
+    width: 100%; /* 스마트폰 화면처럼 가득 차도록 설정 */
+    max-width: 600px; /* 최대 너비 설정 */
+    height: 95vh; /* 화면 높이의 95% 차지 */
+    margin: 20px auto;
+    background-color: #fff; /* 배경색 흰색 */
+    border-radius: 30px; /* 모서리 둥글게 */
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+    display: flex;
+    flex-direction: column;
+    padding: 40px; /* 안쪽 여백 추가 (값 조정 가능) */
+}
+
+/* 페이지 제목 스타일 */
+h2 {
+    margin-bottom: 20px;
+    color: #ff8c00; /* 제목 색상을 주황색으로 변경 */
+}
+
+/* 폼 스타일 */
+form {
+    width: 100%; /* 너비 100% */
+}
+
+/* 제목 입력 스타일 */
+input[type="text"] {
+    width: 100%; /* 너비 100% */
+    padding: 10px; /* 내부 여백 */
+    margin-bottom: 20px; /* 아래쪽 여백 */
+    border: 1px solid #ccc; /* 테두리 색상 */
+    border-radius: 4px; /* 모서리 둥글게 */
+    font-size: 16px; /* 글자 크기 */
+}
+
+/* 내용 입력 스타일 */
+textarea {
+    width: 100%; /* 너비 100% */
+    height: 500px; /* 세로 길이를 200px로 설정 (원하는 길이로 조정 가능) */
+    padding: 10px; /* 내부 여백 */
+    margin-bottom: 20px; /* 아래쪽 여백 */
+    border: 1px solid #ccc; /* 테두리 색상 */
+    border-radius: 4px; /* 모서리 둥글게 */
+    font-size: 16px; /* 글자 크기 */
+    resize: vertical; /* 수직 방향으로 크기 조정 가능 */
+}
+
+
+/* 버튼 그룹 스타일 */
+.button-group {
+    display: flex; /* 버튼 그룹을 가로로 나란히 배치 */
+    justify-content: space-between; /* 양 끝으로 정렬 */
+    width: 100%; /* 너비 100% */
+    margin-top: 20px; /* 위쪽 여백 */
+}
+
+/* 작성하기 버튼 스타일 */
+.submit-button {
+    background-color: #ff8c00; /* 버튼 배경색을 주황색으로 변경 */
+    color: white; /* 글자 색상 */
+    padding: 10px 15px; /* 내부 여백 */
+    border: none; /* 테두리 제거 */
+    border-radius: 4px; /* 모서리 둥글게 */
+    cursor: pointer; /* 커서 변경 */
+    transition: background 0.3s; /* 배경 색상 변화 효과 */
+}
+
+.submit-button:hover {
+    background-color: #e07b00; /* 마우스 오버 시 색상 변화를 약간 어두운 주황색으로 변경 */
+}
+
+/* 취소 버튼 스타일 */
+.cancel-button {
+    background-color: transparent; /* 배경을 투명하게 설정 */
+    color: #333; /* 글자 색상 */
+    padding: 10px 15px; /* 내부 여백 */
+    border: 1px solid #ff8c00; /* 주황색 테두리 */
+    border-radius: 4px; /* 모서리 둥글게 */
+    cursor: pointer; /* 커서 변경 */
+    transition: background 0.3s, color 0.3s; /* 배경 색상 변화 효과 */
+}
+
+.cancel-button:hover {
+    background-color: #ff8c00; /* 마우스 오버 시 배경색 변경 */
+    color: white; /* 글자 색상 흰색으로 변경 */
+}
+/* 뒤로 가기 아이콘 스타일 */
+.back-icon {
+    width: 24px;  /* 너비를 24px로 설정 */
+    height: 24px; /* 높이를 24px로 설정, 비율을 유지하기 위해 너비와 동일하게 설정 */
+    margin-right: 10px; /* 아이콘과 텍스트 간격을 조정 */
+}
+/* 드롭다운 메뉴 스타일 */
+select {
+    font-family: "Pretendard Variable", Pretendard, sans-serif; /* Pretendard 폰트 적용 */
+    font-size: 16px; /* 글자 크기 */
+    padding: 10px; /* 내부 여백 */
+    border: 1px solid #ccc; /* 테두리 색상 */
+    border-radius: 4px; /* 모서리 둥글게 */
+    background-color: white; /* 배경색 흰색 */
+    appearance: none; /* 기본 스타일 제거 */
+}
+
+/* 기본 옵션 스타일 */
+option {
+    font-family: "Pretendard Variable", Pretendard, sans-serif; /* Pretendard 폰트 적용 */
+}
+/* 버튼 스타일 */
+button, .cancel-button, .submit-button {
+    font-family: "Pretendard Variable", Pretendard, sans-serif; /* Pretendard 폰트 적용 */
+    font-size: 16px; /* 글자 크기 */
+}

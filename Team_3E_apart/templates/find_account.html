@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원정보 찾기</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/find_account.css' %}"> <!-- 스타일 시트 연결 -->
+</head>
+<body>
+    <div class="mobile-screen"> <!-- 스마트폰 느낌의 화면 -->
+        <header>
+            <h2>회원정보 찾기</h2>
+            <nav>
+                <a href="{% url '홈' %}">홈으로</a>  <!-- 홈으로 돌아가는 링크 -->
+                <a href="{% url '로그인' %}">로그인</a>  <!-- 로그인 페이지 링크 -->
+                <a href="{% url '회원가입' %}">회원가입</a>  <!-- 회원가입 페이지 링크 -->
+            </nav>
+        </header>
+        <br>
+        <br>
+        <!-- 안내 문구 -->
+        <div class="tooltip">
+            가입 시 사용한 이메일 주소와 아이디를 입력해 주세요.<br>
+        </div>
+        <div class="custom-divider">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="username">아이디</label>
+            <input type="text" id="username" name="username" placeholder="아이디" required>
+            <br>
+            <br>
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" placeholder="이메일" required>
+            
+
+            <br>
+            <br>
+            <div class="button-container">
+                <button>찾기</button>
+            </div>
+            
+        </form>
+        <br>
+        <!-- "아이디와 비밀번호가 기억나지 않으시나요?" 문구 -->
+        <p style="text-align: center; margin-top: 15px;">
+            <a href="{% url '홈' %}" class="no-underline">아이디와 비밀번호가 기억나지 않으시나요?</a>
+        </p>
+
+        <!-- 에러 메시지 (예시로 표시, 필요 시 JavaScript로 동적으로 변경) -->
+        <div class="error-message" style="display: none;">
+            <p>입력한 정보가 일치하지 않습니다. 다시 확인해 주세요.</p>
+        </div>
+    </div>
+</body>
+</html>

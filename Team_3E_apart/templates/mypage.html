@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"> <!-- 프리텐다드 폰트 추가 -->
+    <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
+</head>
+<body>
+    <div class="mobile-screen"> <!-- 모바일 화면 클래스를 추가 -->
+        <div class="header">
+            <div class="icons" style="text-align: right;">
+                <img src="https://cdn-icons-png.flaticon.com/512/309/309601.png" alt="알림 아이콘" class="icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/5087/5087875.png" alt="설정 아이콘" class="icon">
+            </div>
+        </div>
+        
+        <div class="profile">
+            <a href="{% url '프로필사진업로드' %}"> <!-- 프로필 사진 업로드 URL로 이동 -->
+                {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" alt="프로필 사진" class="profile-pic"> <!-- 프로필 사진 -->
+                {% else %}
+                    <img src="https://cdn-icons-png.flaticon.com/512/10337/10337609.png" alt="기본 프로필 사진" class="profile-pic"> <!-- 기본 프로필 사진 -->
+                {% endif %}
+            </a>
+        </div>
+        
+        
+
+        <h2>안녕하세요, {{ user.username }}님,<br> 오늘도 즐거운 하루 되세요 :)</h2>
+        <div class="horizontal-divider"></div>      
+        
+        
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-title">나의 작성 게시물 수</span>
+                <a href="{% url '내게시물' %}" class="stat-number" onclick="changeColor(this)">{{ post_count }}</a>
+            </div>
+            <div class="stat">
+                <span class="stat-title">댓글 수</span>
+                <a href="{% url '내댓글' %}" class="stat-number" onclick="changeColor(this)">{{ comment_count }}</a>
+            </div>
+            <div class="stat">
+                <span class="stat-title">좋아요한 게시물</span>
+                <a href="{% url '내좋아요누른게시물' %}" class="stat-number" onclick="changeColor(this)">*임시*</a>
+            </div>
+        </div>        
+        
+
+
+        <div class="horizontal-divider"></div>
+        <div class="icon-links">
+            <div class="icon-link">
+                <img src="https://cdn-icons-png.flaticon.com/512/5656/5656067.png" alt="공지사항 아이콘">
+                <span>공지사항</span>
+            </div>
+            <div class="icon-link">
+                <img src="https://cdn-icons-png.flaticon.com/512/8552/8552564.png" alt="새소식 아이콘">
+                <span>새소식 확인</span>
+            </div>
+            <div class="icon-link">
+                <img src="https://cdn-icons-png.flaticon.com/512/7414/7414114.png" alt="아파트 모임 아이콘">
+                <span>아파트 모임</span>
+            </div>
+        </div>
+        <div class="horizontal-divider"></div>
+        <h3>우리 아파트, 새 소식을 영상으로 만나보세요!</h3>
+        <div class="gallery-board">
+            <div class="gallery-item">
+                <img src="https://i.ytimg.com/vi/xmpr74jdi-o/hq720.jpg?sqp=-oaymwEXCK4FEIIDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLA7XiDkVr9b8A7rVMQ1hh1Ed6Hv5g" alt="갤러리 이미지 1" class="gallery-image">
+                <div class="gallery-text">아파트 둘러보기</div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://i.ytimg.com/vi/oZBnJp0rX3Q/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDyqRBAnrxCszEDua3iAjA6HC7EzA" alt="갤러리 이미지 2" class="gallery-image">
+                <div class="gallery-text">입지분석 영상</div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://i.ytimg.com/vi/TnTuS21-sFU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCPX7Mqj8dfhHhQQsGz9viEa0knTg" alt="갤러리 이미지 3" class="gallery-image">
+                <div class="gallery-text">아파트 입주 후기</div>
+            </div>
+
+            <!-- 추가 갤러리 이미지 -->
+        </div>
+        
+    </div>
+
+    <script>
+        function changeColor(element) {
+            // 클릭된 요소를 제외한 모든 숫자의 색상을 회색으로 변경
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                stat.style.color = '#ccc'; // 회색으로 변경
+            });
+            element.style.color = '#333'; // 클릭된 숫자의 색상을 기본 색상으로 변경
+        }
+    </script>
+</body>
+</html>

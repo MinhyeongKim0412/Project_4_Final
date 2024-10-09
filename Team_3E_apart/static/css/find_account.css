@@ -1,0 +1,146 @@
+/* find_account.css */
+
+/* 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 웹폰트 불러오기 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+/* 전체 스타일 */
+body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(45deg, rgba(255, 214, 151, 0.8), rgba(255, 255, 204, 0.8), rgba(178, 255, 178, 0.8)); /* 연한 주황, 노랑, 연한 연두색의 사선 그라데이션 */
+    color: #333; /* 기본 글자 색상 */
+    padding: 20px;
+}
+
+/* 페이지 제목 스타일 */
+h2 {
+    margin-bottom: 20px;
+    color: #ff6f30; /* 제목 색상: 주황색 */
+    text-align: center; /* 가운데 정렬 */
+}
+
+
+/* 모바일 화면 느낌의 둥근 사각형, 세로가 긴 직사각형으로 조정 */
+.mobile-screen {
+    width: 600px; /* 스마트폰 화면처럼 세로로 긴 직사각형 */
+    height: 90vh; /* 화면 높이의 80% 차지 */
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 30px;
+    overflow-y: auto; /* 세로 스크롤 추가 */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #ddd;
+    padding: 40px; /* 안쪽 여백 추가 (값 조정 가능) */
+}
+
+/* 폼 스타일 */
+form {
+    display: flex;
+    flex-direction: column; /* 세로 방향 정렬 */
+}
+
+/* 입력 필드 스타일 */
+input[type="text"],
+input[type="email"] {
+    width: 100%; /* 입력 필드 너비를 100%로 설정 */
+    padding: 10px; /* 내부 여백 */
+    margin: 10px 0; /* 위아래 여백 */
+    border: 1px solid #ccc; /* 테두리 색상 */
+    border-radius: 4px; /* 모서리 둥글게 */
+    font-size: 16px; /* 글자 크기 */
+}
+
+/* 버튼 스타일 */
+button {
+    padding: 10px 15px;
+    background-color: #ff6f30; /* 버튼 배경색 (주황색) */
+    color: white; /* 글자 색상 */
+    border: none;
+    border-radius: 5px; /* 버튼 모서리 둥글게 */
+    cursor: pointer; /* 커서 모양 변경 */
+    font-size: 16px; /* 글자 크기 */
+    transition: background 0.3s; /* 배경 색상 변화 효과 */
+    width: 60%; /* 버튼 너비를 60%로 줄임 (원하는 값으로 조정 가능) */
+    max-width: 200px; /* 최대 너비 설정 (원하는 값으로 조정 가능) */
+    font-family: "Pretendard Variable", Pretendard, sans-serif; /* 프리텐다드 폰트 적용 */
+}
+
+
+/* 버튼을 포함하는 부모 요소에 추가할 CSS */
+.button-container {
+    display: flex; /* flexbox 사용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    margin-top: 20px; /* 버튼 위쪽 여백 */
+}
+
+button:hover {
+    background-color: #e65c00; /* 버튼 마우스 오버 시 색상 */
+}
+
+/* 네비게이션 바 스타일 */
+nav {
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+    gap: 20px; /* 링크 간 간격 */
+}
+
+/* 링크 스타일 */
+nav a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: black; /* 링크 색상 */
+    background-color: #fff; /* 배경 색상 */
+    padding: 10px 20px; /* 안쪽 여백 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    transition: background-color 0.3s; /* 배경 색상 변화 효과 */
+}
+
+nav a:hover {
+    color: rgb(255, 153, 70); /* 마우스 오버 시 글자 색상 흰색 */
+}
+
+/* 툴팁 스타일 */
+.tooltip {
+    background-color: #f9f9f9; /* 배경 색상 */
+    border: 1px solid #ccc; /* 테두리 색상 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    padding: 15px; /* 안쪽 여백 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    margin: 20px auto; /* 위아래 여백, 중앙 정렬 */
+    width: fit-content; /* 내용에 맞춰 너비 조정 */
+}
+
+/* 링크 스타일 (밑줄 및 색상 제거) */
+.no-underline {
+    text-decoration: none; /* 밑줄 제거 */
+    color: #333; /* 기본 색상 */
+}
+
+.no-underline:hover {
+    color: #ff6f30; /* 마우스 오버 시 색상 변경 */
+}
+/* 구분선 스타일 */
+.custom-divider {
+    display: flex; /* 점들을 가로로 나열하기 위해 flexbox 사용 */
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    margin: 20px 0; /* 위아래 여백 */
+}
+
+.custom-divider span {
+    display: inline-block; /* 인라인 블록으로 설정 */
+    width: 10px; /* 점의 너비 */
+    height: 10px; /* 점의 높이 */
+    border-radius: 50%; /* 둥글게 만들기 */
+    background-color: #555; /* 진한 회색 (원하는 색상으로 조정 가능) */
+    margin: 0 5px; /* 점 사이의 간격 */
+}

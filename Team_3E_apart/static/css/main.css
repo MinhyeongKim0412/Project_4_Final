@@ -1,0 +1,347 @@
+/* Pretendard Variable 폰트 가져오기 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+/* 배경 그라데이션 */
+body {
+    background: linear-gradient(45deg, rgba(255, 214, 151, 0.8), rgba(255, 255, 204, 0.8), rgba(178, 255, 178, 0.8));
+}
+
+/* 모바일 화면 스타일 */
+.mobile-screen {
+    width: 600px;
+    height: 95vh;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #ddd;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+/* 상단 고정 헤더 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: linear-gradient(45deg, rgba(255, 179, 38, 0.8), rgba(255, 255, 204, 0.8), rgba(178, 255, 178, 0.8), rgba(173, 216, 230, 0.8));
+    color: white;
+    border-bottom: 2px solid #ddd;
+}
+
+
+/* 로고 스타일 */
+.logo {
+    width: 110px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    margin-left: 240px;
+}
+/* 검색 기능 폼 숨기기 */
+form {
+    display: inline-block;
+    position: relative;
+}
+
+form input[type="text"] {
+    width: 60px; /* 기본적으로 검색창을 작게 설정 */
+    opacity: 0; /* 처음에 검색창은 숨김 */
+    transition: width 0.5s ease, opacity 0.5s ease; /* 애니메이션 추가 */
+    font-size: 12px; /* 플레이스홀더 글자 크기 축소 */
+    padding: 5px; /* 여백 추가 */
+}
+
+/* 돋보기 버튼 클릭 시 검색창이 열리도록 */
+form:focus-within input[type="text"],
+form:hover input[type="text"] {
+    width: 100px; /* 검색창 너비 확대 */
+    opacity: 1; /* 검색창 표시 */
+    transition: width 0.5s ease, opacity 0.5s ease;
+}
+
+/* 돋보기 버튼 스타일 */
+.search-button {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* 플레이스홀더 폰트 크기 축소 */
+input[type="text"]::placeholder {
+    font-size: 12px;
+    color: #888; /* 플레이스홀더 색상 */
+    text-overflow: ellipsis; /* 텍스트가 넘칠 때 말줄임표로 처리 */
+    white-space: nowrap; /* 한 줄로 유지 */
+    overflow: hidden; /* 넘치는 텍스트 숨기기 */
+}
+
+
+/* 상단 상태바 */
+.status-bar {
+    height: 40px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    font-size: 16px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+/* 좌측 아이콘 정렬 */
+.left-icons {
+    display: flex;
+    align-items: center;
+}
+
+/* 우측 아이콘 정렬 */
+.right-icons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* 현재 시간 스타일 */
+#current-time {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+    color: white;
+}
+
+/* 배터리 수준 스타일 */
+#battery-level {
+    font-size: 16px;
+    color: white;
+}
+
+/* 메인 콘텐츠 스크롤 설정 */
+main {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+/* 외부 컨테이너 스타일 */
+.outer {
+    position: relative; /* 포지션을 상대적으로 설정 */
+    width: 100%; /* 부모 요소에 맞게 조정 */
+    max-width: 800px; /* 최대 폭 설정 (원하는 대로 조정) */
+    height: 400px; /* 높이 조정 (원하는 대로 조정) */
+    margin: 0 auto;
+    overflow: hidden; /* 넘치는 내용 숨기기 */
+}
+
+/* 내부 리스트 스타일 */
+.inner-list {
+    display: flex;
+    transition: transform 0.5s ease; /* 부드러운 이동 효과 */
+    height: 100%;
+}
+
+.inner {
+    min-width: 100%; /* 각 슬라이드의 최소 폭을 100%로 설정 */
+    height: 100%;
+}
+
+.inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 버튼 스타일 */
+.nav-button.left, .nav-button.right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1000; /* 버튼이 이미지 위에 위치하도록 설정 */
+}
+
+.nav-button.left {
+    left: 10px; /* 왼쪽 버튼 위치 */
+}
+
+.nav-button.right {
+    right: 10px; /* 오른쪽 버튼 위치 */
+}
+
+
+
+/* 버튼 리스트 스타일 */
+.button-list {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* 좌우 이동 버튼 스타일 */
+.button-left, .button-right {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+/* 네비게이션 바 스타일 */
+.navigation {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+/* 아이콘 그리드 스타일 */
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 10px;
+    place-items: center;
+    margin-top: 30px;
+}
+
+/* 아이콘 스타일 */
+.icon-grid img,
+.icon-grid i {
+    width: 60px;
+    height: 60px;
+}
+
+/* 아이콘 아이템 스타일 */
+.icon-item {
+    text-align: center;
+    text-decoration: none;
+}
+
+.icon-item p {
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ee8300;
+    text-decoration: none;
+}
+
+.icon-item a {
+    text-decoration: none;
+}
+
+/* 갤러리 컨텐츠 스타일 */
+.container .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+/* 갤러리 아이템 스타일 */
+.container .gallery-item {
+    padding: 0;
+    margin: 8px;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100px;
+    height: 70px;
+    position: relative;
+    overflow: hidden;
+}
+
+.container .gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* 갤러리 텍스트 스타일 */
+.container .gallery-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 0 0 15px 15px;
+}
+
+/* 하단 네비게이션 바 스타일 */
+.bottom-nav-bar {
+    height: 50px;
+    background-color: #ebe9ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    gap: 20px;
+}
+
+/* 하단 네비게이션 아이콘 스타일 */
+.nav-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 이미지 아이콘 스타일 */
+.nav-icon img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+/* 폰트 아이콘 스타일 */
+.nav-icon i {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+/* 갤러리 섹션 제목 스타일 */
+.container .gallery-section h3 {
+    text-align: left;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* 갤러리 섹션 스타일 */
+.container .gallery-section {
+    margin-bottom: 30px;
+}
+
+/* 갤러리 가로 스크롤 설정 */
+.container .gallery {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+/* 갤러리 아이템 스타일 */
+.container .gallery-item {
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 200px;
+    height: 100px;
+    flex: 0 0 auto;
+}
